@@ -28,6 +28,8 @@
 
     lastpass-cli   # password manager
 
+    # zsh
+
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -87,9 +89,20 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  programs.zsh = {
-    enable = true;
-  };
+  # programs.zsh = {
+  #   enable = true;
+  #   plugins = [
+  #     # local plugins
+  #     {
+  #       name = "zsh-config";
+  #       file = ".zshrc";
+  #       src = pkgs.fetchTree {
+  #         type = "file";
+  #         url = "file:///home/willothy/.config/zsh/";
+  #       };
+  #     }
+  #   ];
+  # };
 
   programs.git = {
     enable = true;
