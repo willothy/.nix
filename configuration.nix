@@ -80,6 +80,8 @@ in {
   i18n.defaultLocale = "en_US.UTF-8";
   time = {
     inherit timeZone;
+    # Fixes desync between Windows and Linux time tracking.
+    hardwareClockInLocalTime = true;
   };
 
   console = {
