@@ -95,21 +95,30 @@ in {
 
     users.willothy = {
       isNormalUser = true;
-      initialPassword = "password";	
-      extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+      initialPassword = "letmein";	
+      extraGroups = [ "wheel" ];
       packages = with pkgs; [
-        luajit
+        luajit # goal is to build awesomewm with LuaJIT
         brave
         gnome.nautilus
         wezterm
+        discord
       ];
     };
   };
 
   environment = {
     systemPackages = with pkgs; [
+      # system essentials
       wget
       btrfs-progs
+
+      # CLI tools I want globally available
+      bottom
+      jq
+      ripgrep
+      fd
+      hexyl
     ];
 
     # Globally set editor to nvim
@@ -120,8 +129,6 @@ in {
     ];
   };
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
 
   services.btrfs.autoScrub = {
     enable = true;
@@ -131,6 +138,11 @@ in {
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+
+  # Enable the OpenSSH daemon.
+  services.openssh.enable = true;
+
+  services.gnome.gnome-keyring.enable = true;
 
   programs.gnupg.agent = {
     enable = true;
