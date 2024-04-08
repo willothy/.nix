@@ -7,10 +7,9 @@
   userName = "willothy";
   timeZone = "America/Los_Angeles";
 in {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [ 
+    ./hardware-configuration.nix
+  ];
 
   nix.settings = {
     experimental-features = [ 
@@ -43,6 +42,7 @@ in {
 
   hardware = {
     pulseaudio.enable = true;
+    ckb-next.enable = true;
 
     opengl = {
       enable = true;
@@ -129,7 +129,6 @@ in {
     ];
   };
 
-
   services.btrfs.autoScrub = {
     enable = true;
     interval = "weekly";
@@ -158,6 +157,7 @@ in {
         set tabstop=2
         set shiftwidth=2
         set expandtab
+        set scrolloff=10
       '';
     };
   };
