@@ -42,7 +42,6 @@ in {
 
   hardware = {
     pulseaudio.enable = true;
-    ckb-next.enable = true;
 
     opengl = {
       enable = true;

@@ -28,7 +28,6 @@ in {
         IdentityAgent ~/.1password/agent.sock
     '';
   };
-
   programs.git = {
     enable = true;
     userName = "Will Hopkins";
@@ -48,6 +47,14 @@ in {
     enable = true;
     enableBashIntegration = true;
     enableZshIntegration = true;
+  };
+  programs.gh = {
+    enable = true;
+    extensions = [ ];
+    settings = {
+      git_protocol = "ssh";
+      aliases = { };
+    };
   };
 
   programs.bash = {
