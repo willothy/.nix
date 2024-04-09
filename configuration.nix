@@ -46,6 +46,7 @@ in {
 
   hardware = {
     pulseaudio.enable = true;
+    pulseaudio.support32Bit = true;
 
     opengl = {
       enable = true;
@@ -67,6 +68,7 @@ in {
 
   sound = {
     enable = true;
+    mediaKeys.enable = true;
   };
 
   security = {
@@ -89,8 +91,8 @@ in {
 
   console = {
     font = "Lat2-Terminus16";
-    keyMap = "us";
-    # useXkbConfig = true; # use xkb.options in tty.
+    #keyMap = "us";
+    useXkbConfig = true; # use xkb.options in tty.
   };
 
   users = {
@@ -99,13 +101,14 @@ in {
     users.willothy = {
       isNormalUser = true;
       initialPassword = "letmein";	
-      extraGroups = [ "wheel" ];
+      extraGroups = [ 
+        "networkmanager" 
+        "wheel" 
+        "audio"
+        "jackaudio"
+      ];
       packages = with pkgs; [
-        luajit # goal is to build awesomewm with LuaJIT
-        brave
-        gnome.nautilus
-        wezterm
-        discord
+
       ];
     };
   };
@@ -122,6 +125,13 @@ in {
       ripgrep
       fd
       hexyl
+
+      # luajit # goal is to build awesomewm with LuaJIT
+      luarocks
+      brave
+      gnome.nautilus
+      wezterm
+      discord
     ];
 
     # Globally set editor to nvim
@@ -139,7 +149,7 @@ in {
   }; 
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  #services.printing.enable = true;
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;

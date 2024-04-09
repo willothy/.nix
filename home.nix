@@ -3,6 +3,11 @@
     ll = "ls -l";
     la = "ls -a";
     ".." = "cd ..";
+    gs = "git status";
+    gc = "git commit";
+    ga = "git add";
+    gaa = "git add --all";
+    gau = "git add --update";
   };
 in {
 
