@@ -13,36 +13,34 @@
     # Remaps. Probably don't need this bc of ZMK remaps.
     # xkb.options = "caps:escape";
 
+    videoDrivers = [ "nvidia" ];
+
+    #exportConfiguration = true;
+
     displayManager = {
       defaultSession = "none+awesome";
       lightdm = {
         enable = true;
       };
+      # Fixes xrandrHeads order, which seems to be broken
+      setupCommands = ''
+        ${pkgs.xorg.xrandr}/bin/xrandr --output HDMI-0 --left-of DP-4 --output DP-4 --primary
+      '';
     };
 
-    desktopManager.xterm.enable = false;
-
     windowManager.awesome = {
-      enable = true;
-      luaModules = with pkgs.luaPackages; [
+      enable = true; luaModules = with pkgs.luaPackages; [
         luarocks
         luadbi-mysql
         lgi
       ];
     };
 
-    xrandrHeads = [
+    xrandrHeads = [ 
+      "HDMI-0"
       {
-        output = "HDMI-1";
-        monitorConfig = ''
-        '';
-      } 
-      {
-        output = "DP-1";
+        output = "DP-4";
         primary = true;
-        monitorConfig = ''
-          Option "RightOf" "HDMI-1"
-        '';
       }
     ];
   };

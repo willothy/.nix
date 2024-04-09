@@ -65,12 +65,9 @@ in {
     };
   };
 
-  security = {
-    polkit.enable = true;
-    pam = {
-      #sshAgentAuth.enable = true;
-    };
-  };
+  security.polkit.enable = true;
+  security.pam.services.lightdm.enableGnomeKeyring = true;
+  services.gnome.gnome-keyring.enable = true;
 
   networking = {
     inherit hostName;
@@ -118,6 +115,11 @@ in {
       # system essentials
       wget
       btrfs-progs
+      bluez
+      bluez-tools
+      xdg-utils
+      pipewire
+      wireplumber
 
       # CLI tools I want globally available
       bottom
@@ -154,8 +156,6 @@ in {
     pulse.enable = true;
   };
 
-  services.gnome.gnome-keyring.enable = true;
-
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
@@ -189,6 +189,7 @@ in {
       '';
       mode = "0755";
     };
+    #"X11/xorg.conf".source = ./xorg.conf;
   };
 
   programs.zsh.enable = true;
