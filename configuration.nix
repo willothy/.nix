@@ -65,10 +65,6 @@ in {
     };
   };
 
-  security.polkit.enable = true;
-  security.pam.services.lightdm.enableGnomeKeyring = true;
-  services.gnome.gnome-keyring.enable = true;
-
   networking = {
     inherit hostName;
 
@@ -115,11 +111,6 @@ in {
       # system essentials
       wget
       btrfs-progs
-      bluez
-      bluez-tools
-      xdg-utils
-      pipewire
-      wireplumber
 
       # CLI tools I want globally available
       bottom
@@ -127,10 +118,14 @@ in {
       ripgrep
       fd
       hexyl
+
+      polkit_gnome
     ];
 
     # Globally set editor to nvim
     variables.EDITOR = "nvim";
+
+    variables.SSH_AUTH_SOCK = "~/.1password/agent.sock";
 
     shells = with pkgs; [
       zsh
@@ -146,19 +141,12 @@ in {
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
 
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     wireplumber.enable = true;
     pulse.enable = true;
-  };
-
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
   };
 
   programs.neovim = {
@@ -177,10 +165,48 @@ in {
 
   programs.seahorse.enable = true;
 
+  # Enable the OpenSSH daemon.
+  services.openssh.enable = true;
+  programs.ssh = {
+    startAgent = false;
+    extraConfig = ''
+      Host *
+        IdentityAgent ~/.1password/agent.sock
+    '';
+  };
+
+  security = {
+    pam.services.lightdm.enableGnomeKeyring = true;
+    polkit.enable = true;
+  };
+  
+  services.gnome.gnome-keyring.enable = true;
+
+  systemd = {
+    user.services.polkit-gnome-authentication-agent-1 = {
+      description = "polkit-gnome-authentication-agent-1";
+      wantedBy = [ "graphical-session.target" ];
+      wants = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+      serviceConfig = {
+          Type = "simple";
+          ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+          Restart = "on-failure";
+          RestartSec = 1;
+          TimeoutStopSec = 10;
+        };
+    };
+  };
+
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = false;
+  };
+
   programs._1password.enable = true;
   programs._1password-gui = {
     enable = true;
-    polkitPolicyOwners = [ userName ];
+    polkitPolicyOwners = [ "willothy" ];
   };
   environment.etc = {
     "1password/custom_allowed_browsers" = {
@@ -189,7 +215,6 @@ in {
       '';
       mode = "0755";
     };
-    #"X11/xorg.conf".source = ./xorg.conf;
   };
 
   programs.zsh.enable = true;

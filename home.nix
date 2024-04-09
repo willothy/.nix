@@ -28,13 +28,6 @@ in {
     };
   };
 
-  programs.ssh = {
-    enable = true;
-    extraConfig = ''
-      Host *
-        IdentityAgent ~/.1password/agent.sock
-    '';
-  };
   programs.git = {
     enable = true;
     userName = "Will Hopkins";
@@ -57,7 +50,7 @@ in {
       color.pager = "yes";
       gpg.format = "ssh";
       "gpg \"ssh\"" = {
-        program = "${pkgs._1password-gui}/share/1password/op-ssh-sign";
+        program = "${pkgs._1password-gui}/bin/op-ssh-sign";
       };
       pull = {
         rebase = true;
