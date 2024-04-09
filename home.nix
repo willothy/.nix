@@ -32,8 +32,29 @@ in {
     enable = true;
     userName = "Will Hopkins";
     userEmail = "willothyh@gmail.com";
+    signing = {
+      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEuB3Fm5F9/qUWn2Ok7EXZc8OkKmvy6AHI+Wit0+XDiV";
+      signByDefault = true;
+    };
     delta = {
       enable = true;
+      options = {
+        navigate = true;
+        light = false;
+      };
+    };
+    extraConfig = {
+      init = {
+        defaultBranch = "main";
+      };
+      color.pager = "yes";
+      gpg.format = "ssh";
+      "gpg \"ssh\"" = {
+        program = "${pkgs._1password-gui}/share/1password/op-ssh-sign";
+      };
+      pull = {
+        rebase = true;
+      };
     };
   };
   programs.eza = {

@@ -11,11 +11,15 @@ in {
     ./hardware-configuration.nix
   ];
 
-  nix.settings = {
-    experimental-features = [ 
-      "nix-command"
-      "flakes"
-    ];
+  nix.settings.experimental-features = [ 
+    "nix-command"
+    "flakes"
+  ];
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 1w";
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -176,7 +180,13 @@ in {
   };
 
   programs.zsh.enable = true;
-  programs.git.enable = true;
+  programs.git = {
+    enable = true;
+    config = {
+      init.defaultBranch = "main";
+    };
+    prompt.enable = true;
+  };
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
