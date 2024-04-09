@@ -24,7 +24,7 @@
       };
       # Fixes xrandrHeads order, which seems to be broken
       setupCommands = ''
-        ${pkgs.xorg.xrandr}/bin/xrandr --output HDMI-0 --left-of DP-4 --output DP-4 --primary
+        ${pkgs.xorg.xrandr}/bin/xrandr --output HDMI-0 --mode "1920x1080@60" --left-of DP-4 --output DP-4 --mode "2560x1080@60" --primary
       '';
     };
 
