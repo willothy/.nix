@@ -14,9 +14,11 @@
     # xkb.options = "caps:escape";
 
     displayManager = {
-       defaultSession = "none+awesome";
+      defaultSession = "none+awesome";
+      lightdm = {
+        enable = true;
+      };
     };
-    displayManager.lightdm.enable = true;
 
     desktopManager.xterm.enable = false;
 
@@ -24,8 +26,8 @@
       enable = true;
       luaModules = with pkgs.luaPackages; [
         luarocks
+        luadbi-mysql
         lgi
-        #luadbi-mysql
       ];
     };
 

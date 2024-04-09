@@ -15,7 +15,9 @@ in {
     username = "willothy";
     homeDirectory = "/home/willothy";
 
-    packages = with pkgs; [ ];
+    packages = with pkgs; [
+
+    ];
 
     file = { };
 

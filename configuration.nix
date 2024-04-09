@@ -22,7 +22,9 @@ in {
     options = "--delete-older-than 1w";
   };
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+  };
 
   boot.loader = {
     # Default: Use the systemd-boot EFI boot loader.
@@ -45,9 +47,6 @@ in {
   };
 
   hardware = {
-    pulseaudio.enable = true;
-    pulseaudio.support32Bit = true;
-
     opengl = {
       enable = true;
       driSupport = true;
@@ -66,13 +65,11 @@ in {
     };
   };
 
-  sound = {
-    enable = true;
-    mediaKeys.enable = true;
-  };
-
   security = {
     polkit.enable = true;
+    pam = {
+      #sshAgentAuth.enable = true;
+    };
   };
 
   networking = {
@@ -91,8 +88,8 @@ in {
 
   console = {
     font = "Lat2-Terminus16";
-    #keyMap = "us";
-    useXkbConfig = true; # use xkb.options in tty.
+    keyMap = "us";
+    #useXkbConfig = true; # use xkb.options in tty.
   };
 
   users = {
@@ -103,12 +100,15 @@ in {
       initialPassword = "letmein";	
       extraGroups = [ 
         "networkmanager" 
-        "wheel" 
         "audio"
-        "jackaudio"
+        "wheel" 
       ];
       packages = with pkgs; [
-
+        brave
+        gnome.nautilus
+        wezterm
+        discord
+        pavucontrol
       ];
     };
   };
@@ -125,13 +125,6 @@ in {
       ripgrep
       fd
       hexyl
-
-      # luajit # goal is to build awesomewm with LuaJIT
-      luarocks
-      brave
-      gnome.nautilus
-      wezterm
-      discord
     ];
 
     # Globally set editor to nvim
@@ -149,10 +142,17 @@ in {
   }; 
 
   # Enable CUPS to print documents.
-  #services.printing.enable = true;
+  services.printing.enable = true;
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    wireplumber.enable = true;
+    pulse.enable = true;
+  };
 
   services.gnome.gnome-keyring.enable = true;
 
@@ -174,6 +174,8 @@ in {
       '';
     };
   };
+
+  programs.seahorse.enable = true;
 
   programs._1password.enable = true;
   programs._1password-gui = {
