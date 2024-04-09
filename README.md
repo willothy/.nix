@@ -13,6 +13,7 @@ many great resources on the internet. Here are some I have found helpful:
 - [LibrePhoenix (YouTube)](https://www.youtube.com/@librephoenix)
 - [NixOS Search](https://search.nixos.org)
 - [NixOS Wiki](https://nixos.wiki/wiki/Main_Page)
+- [NixOS and Flakes Book](https://nixos-and-flakes.thiscute.world/)
 - [Home-Manager Wiki](https://nix-community.github.io/home-manager/)
   - Don't miss the [list of all options](https://nix-community.github.io/home-manager/options.xhtml) in the appendices!
   - If you're not sure about a home-manager package's configuration, [look at the source](https://github.com/nix-community/home-manager/).
