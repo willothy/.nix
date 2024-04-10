@@ -141,7 +141,6 @@ in {
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -191,6 +190,19 @@ in {
       serviceConfig = {
           Type = "simple";
           ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+          Restart = "on-failure";
+          RestartSec = 1;
+          TimeoutStopSec = 10;
+        };
+    };
+    user.services."1password-daemon" = {
+      description = "1password-daemon";
+      wantedBy = [ "graphical-session.target" ];
+      wants = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+      serviceConfig = {
+          Type = "simple";
+          ExecStart = "${pkgs._1password-gui}/bin/1password --silent";
           Restart = "on-failure";
           RestartSec = 1;
           TimeoutStopSec = 10;
