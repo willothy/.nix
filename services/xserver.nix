@@ -14,7 +14,6 @@
     #exportConfiguration = true;
 
     displayManager = {
-      defaultSession = "none+awesome";
       lightdm = {
         enable = true;
       };
@@ -22,15 +21,6 @@
       setupCommands = ''
         ${pkgs.xorg.xrandr}/bin/xrandr --output HDMI-0 --mode "1920x1080" --left-of DP-4 --output DP-4 --mode "2560x1080" --primary
       '';
-    };
-
-    windowManager.awesome = {
-      enable = true;
-      #luaModules = with pkgs.luajitPackages; [
-      #  luarocks
-      #  luadbi-mysql
-      #  lgi
-      #];
     };
 
     xrandrHeads = [

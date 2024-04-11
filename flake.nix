@@ -40,9 +40,11 @@
       pkgs = import nixpkgs {
         inherit (system) system;
 
-        overlays = [
-          inputs.neovim-nightly-overlay.overlay
-        ];
+        overlays =
+          [
+            (import ./overlays/awesome-git.nix)
+            inputs.neovim-nightly-overlay.overlay
+          ];
 
         config = {
           allowUnfree = true;

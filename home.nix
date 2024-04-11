@@ -55,6 +55,11 @@ in
     recursive = true;
   };
 
+  xsession.windowManager.awesome = {
+    package = pkgs.awesome-luajit-git;
+    enable = true;
+  };
+
   programs.wezterm = {
     enable = true;
     enableBashIntegration = true;
