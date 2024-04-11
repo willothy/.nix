@@ -3,7 +3,6 @@
 with lib;
 
 let
-
   cfg = config.boot.loader.refind;
 
   efi = config.boot.loader.efi;
@@ -64,6 +63,7 @@ in
     ];
 
     boot.loader.grub.enable = mkDefault false;
+    boot.loader.systemd-boot.enable = mkDefault false;
 
     boot.loader.supportsInitrdSecrets = false; # TODO what does this do ?
 
