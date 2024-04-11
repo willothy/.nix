@@ -21,8 +21,22 @@
 
   boot.loader = {
     # Default: Use the systemd-boot EFI boot loader.
-    systemd-boot.enable = true;
+    # systemd-boot.enable = true;
+    systemd-boot.enable = lib.mkForce false;
 
+    refind = {
+      enable = true;
+      extraConfig = ''
+        resolution 0
+        dont_scan_dirs NIX-BOOT:/EFI/nixos
+        hideui banner,editor
+        showtools shutdown reboot firmware
+        use_graphics_for linux,windows
+        include themes/refind-theme-regular/theme.conf
+      '';
+    };
+
+    grub.enable = lib.mkForce false;
     # grub = {
     #   enable = true;
     #   useOSProber = true;
@@ -133,6 +147,7 @@
 
       # Language-specific packages
       nodejs_21
+      python312
       rustup
       gcc
       luajit

@@ -72,6 +72,7 @@
             ./configuration.nix
             ./services/xserver.nix
             ./services/1password.nix
+            ./refind/refind.nix
           ];
         };
       };
