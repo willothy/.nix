@@ -71,6 +71,7 @@ in
       enable = true;
       font = "Maple Mono NF";
       location = "center";
+      terminal = user.terminal;
       theme =
         let
           inherit (config.lib.formats.rasi) mkLiteral;
