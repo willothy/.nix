@@ -8,24 +8,56 @@
     ga = "git add";
     gaa = "git add --all";
     gau = "git add --update";
+    v = "nvim";
+    ":q" = "exit";
   };
 in {
-
   home = {
     username = "willothy";
     homeDirectory = "/home/willothy";
 
     packages = with pkgs; [
-
+      neovim-nightly
     ];
 
-    file = { };
+    file = {
+      # lua/plugins/* gets autoloaded by Lazy, so I use this to
+      # do required nix-specific setup.
+      ".config/nvim/lua/plugins/nix.lua" = {
+        enable = true;
+        text = ''
+          vim.g.sqlite_clib_path = "${pkgs.sqlite.out}/lib/libsqlite3.so"
+
+          return {}
+        '';
+      };
+    };
 
     sessionVariables = {
       EDITOR = "nvim";
       VISUAL = "nvim -b";
       BROWSER = "brave";
+
+      # 1password ssh agent
+      SSH_AUTH_SOCK = "~/.1password/agent.sock";
     };
+  };
+
+  programs.neovim = {
+    package = pkgs.neovim-nightly;
+    enable = true;
+    # extraLuaConfig = ''
+    #   vim.g.sqlite_clib_path = "${pkgs.sqlite.out}/lib/libsqlite3.so"
+    #   require("willothy")
+    # '';
+  };
+
+  programs.ssh = {
+    enable = true;
+    extraConfig = ''
+      Host *
+        IdentityAgent ~/.1password/agent.sock
+    '';
   };
 
   programs.git = {
@@ -56,6 +88,12 @@ in {
         rebase = true;
       };
     };
+  };
+  programs.zoxide = {
+    enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
+    options = [ ];
   };
   programs.eza = {
     enable = true;

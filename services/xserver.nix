@@ -29,14 +29,15 @@
     };
 
     windowManager.awesome = {
-      enable = true; luaModules = with pkgs.luaPackages; [
-        luarocks
-        luadbi-mysql
-        lgi
-      ];
+      enable = true;
+     #luaModules = with pkgs.luajitPackages; [
+     #  luarocks
+     #  luadbi-mysql
+     #  lgi
+     #];
     };
 
-    xrandrHeads = [ 
+    xrandrHeads = [
       "HDMI-0"
       {
         output = "DP-4";

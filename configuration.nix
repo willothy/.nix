@@ -7,11 +7,11 @@
   userName = "willothy";
   timeZone = "America/Los_Angeles";
 in {
-  imports = [ 
+  imports = [
     ./hardware-configuration.nix
   ];
 
-  nix.settings.experimental-features = [ 
+  nix.settings.experimental-features = [
     "nix-command"
     "flakes"
   ];
@@ -90,11 +90,11 @@ in {
 
     users.willothy = {
       isNormalUser = true;
-      initialPassword = "letmein";	
-      extraGroups = [ 
-        "networkmanager" 
+      initialPassword = "letmein";
+      extraGroups = [
+        "networkmanager"
         "audio"
-        "wheel" 
+        "wheel"
       ];
       packages = with pkgs; [
         brave
@@ -111,6 +111,11 @@ in {
       # system essentials
       wget
       btrfs-progs
+      unzip
+
+      # UX essentials
+      polkit_gnome
+      xsel
 
       # CLI tools I want globally available
       bottom
@@ -118,14 +123,24 @@ in {
       ripgrep
       fd
       hexyl
+      fzf
 
-      polkit_gnome
+      # Build tools
+      gnumake
+      cmake
+
+      # Libraries
+      sqlite
+
+      # Language-specific packages
+      nodejs_21
+      rustup
+      gcc
+      luajit
     ];
 
     # Globally set editor to nvim
     variables.EDITOR = "nvim";
-
-    variables.SSH_AUTH_SOCK = "~/.1password/agent.sock";
 
     shells = with pkgs; [
       zsh
@@ -135,8 +150,9 @@ in {
   services.btrfs.autoScrub = {
     enable = true;
     interval = "weekly";
+    # Handles nested subvolumes automatically
     fileSystems = [ "/" ];
-  }; 
+  };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -147,6 +163,14 @@ in {
     wireplumber.enable = true;
     pulse.enable = true;
   };
+
+  # programs.nix-ld = {
+  #   enable = true;
+  #   libraries = with pkgs; [
+  #     luajit
+  #     sqlite
+  #   ];
+  # };
 
   programs.neovim = {
     enable = true;
@@ -162,24 +186,20 @@ in {
     };
   };
 
-  programs.seahorse.enable = true;
+  programs.ssh = {
+    startAgent = true;
+  };
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-  programs.ssh = {
-    startAgent = false;
-    extraConfig = ''
-      Host *
-        IdentityAgent ~/.1password/agent.sock
-    '';
-  };
+
+  programs.seahorse.enable = true;
+  services.gnome.gnome-keyring.enable = true;
 
   security = {
     pam.services.lightdm.enableGnomeKeyring = true;
     polkit.enable = true;
   };
-  
-  services.gnome.gnome-keyring.enable = true;
 
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
@@ -195,38 +215,11 @@ in {
           TimeoutStopSec = 10;
         };
     };
-    user.services."1password-daemon" = {
-      description = "1password-daemon";
-      wantedBy = [ "graphical-session.target" ];
-      wants = [ "graphical-session.target" ];
-      after = [ "graphical-session.target" ];
-      serviceConfig = {
-          Type = "simple";
-          ExecStart = "${pkgs._1password-gui}/bin/1password --silent";
-          Restart = "on-failure";
-          RestartSec = 1;
-          TimeoutStopSec = 10;
-        };
-    };
   };
 
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = false;
-  };
-
-  programs._1password.enable = true;
-  programs._1password-gui = {
-    enable = true;
-    polkitPolicyOwners = [ "willothy" ];
-  };
-  environment.etc = {
-    "1password/custom_allowed_browsers" = {
-      text = ''
-        brave
-      '';
-      mode = "0755";
-    };
   };
 
   programs.zsh.enable = true;
