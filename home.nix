@@ -13,35 +13,38 @@
     cd = "z";
   };
 in {
-  home = {
-    username = "willothy";
-    homeDirectory = "/home/willothy";
+  home.username = "willothy";
+  home.homeDirectory = "/home/willothy";
 
-    packages = with pkgs; [
-      neovim-nightly
-    ];
+  home.packages = with pkgs; [ ];
 
-    file = {
-      # lua/plugins/* gets autoloaded by Lazy, so I use this to
-      # do required nix-specific setup.
-      ".config/nvim/lua/plugins/nix.lua" = {
-        enable = true;
-        text = ''
-          vim.g.sqlite_clib_path = "${pkgs.sqlite.out}/lib/libsqlite3.so"
+  home.file = {
+    # lua/plugins/* gets autoloaded by Lazy, so I use this to
+    # do required nix-specific setup.
+    ".config/nvim/lua/plugins/nix.lua" = {
+      enable = true;
+      text = ''
+        -- set sqlite library path for sqlite.lua
+        vim.g.sqlite_clib_path = "${pkgs.sqlite.out}/lib/libsqlite3.so"
 
-          return {}
-        '';
-      };
+        return {}
+      '';
     };
+  };
 
-    sessionVariables = {
-      EDITOR = "nvim";
-      VISUAL = "nvim -b";
-      BROWSER = "brave";
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    VISUAL = "nvim -b";
+    BROWSER = "brave";
 
-      # 1password ssh agent
-      SSH_AUTH_SOCK = "/home/willothy/.1password/agent.sock";
-    };
+    # 1password ssh agent
+    SSH_AUTH_SOCK = "/home/willothy/.1password/agent.sock";
+  };
+
+  programs.wezterm = {
+    enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
   };
 
   programs.neovim = {

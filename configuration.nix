@@ -99,9 +99,7 @@ in {
       packages = with pkgs; [
         brave
         gnome.nautilus
-        wezterm
         discord
-        pavucontrol
       ];
     };
   };
@@ -115,6 +113,7 @@ in {
 
       # UX essentials
       polkit_gnome
+      volctl
       xsel
 
       # CLI tools I want globally available
