@@ -163,14 +163,6 @@ in {
     pulse.enable = true;
   };
 
-  # programs.nix-ld = {
-  #   enable = true;
-  #   libraries = with pkgs; [
-  #     luajit
-  #     sqlite
-  #   ];
-  # };
-
   programs.neovim = {
     enable = true;
     defaultEditor = true;

@@ -18,19 +18,21 @@ in {
 
   home.packages = with pkgs; [ ];
 
-  home.file = {
-    # lua/plugins/* gets autoloaded by Lazy, so I use this to
-    # do required nix-specific setup.
-    ".config/nvim/lua/plugins/nix.lua" = {
-      enable = true;
-      text = ''
-        -- set sqlite library path for sqlite.lua
-        vim.g.sqlite_clib_path = "${pkgs.sqlite.out}/lib/libsqlite3.so"
+  # lua/plugins/* gets autoloaded by Lazy, so I use this to
+  # do required nix-specific setup.
+  home.file.".config/nvim/lua/plugins/nix.lua" = {
+    text = ''
+      -- set sqlite library path for sqlite.lua
+      vim.g.sqlite_clib_path = "${pkgs.sqlite.out}/lib/libsqlite3.so"
 
-        return {}
-      '';
-    };
+      return {}
+    '';
   };
+
+  home.file.".config/wezterm" = {
+    source = ./configs/wezterm/;
+    recursive = true;
+  }
 
   home.sessionVariables = {
     EDITOR = "nvim";
@@ -45,6 +47,20 @@ in {
     enable = true;
     enableBashIntegration = true;
     enableZshIntegration = true;
+  };
+
+  programs.atuin = {
+    enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
+    settings = {
+      auto_sync = true;
+      sync_frequency = "30m";
+      style = "auto";
+    };
+    flags = [
+      "--disable-up-arrow"
+    ];
   };
 
   programs.neovim = {
