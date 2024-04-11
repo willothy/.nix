@@ -30,7 +30,6 @@ let
 
 in
 {
-
   options.boot.loader.refind = {
     enable = mkOption {
       default = false;

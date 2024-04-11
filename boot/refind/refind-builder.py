@@ -130,7 +130,6 @@ submenuentry "Generation {generation} {description}" {{
 }}
 """
 
-
 def write_refind_config(path, default_generation, generations):
     with open(path, 'w') as f:
         if "@timeout@" != "":

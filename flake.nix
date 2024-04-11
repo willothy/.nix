@@ -22,6 +22,7 @@
         hostname = "nostromo";
         timezone = "America/Los_Angeles";
         locale = "en_US.UTF-8";
+        configsDir = ./configs;
       };
 
       user = rec {
@@ -69,10 +70,8 @@
           };
 
           modules = [
-            ./configuration.nix
-            ./services/xserver.nix
-            ./services/1password.nix
-            ./refind/refind.nix
+            ./boot/refind
+            ./system/configuration.nix
           ];
         };
       };
@@ -87,7 +86,7 @@
           };
 
           modules = [
-            ./home.nix
+            ./user/home.nix
           ];
         };
       };

@@ -2,6 +2,8 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./programs
+    ./services
   ];
 
   nix.settings.experimental-features = [
