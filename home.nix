@@ -40,24 +40,20 @@ in {
       BROWSER = "brave";
 
       # 1password ssh agent
-      SSH_AUTH_SOCK = "~/.1password/agent.sock";
+      SSH_AUTH_SOCK = "/home/willothy/.1password/agent.sock";
     };
   };
 
   programs.neovim = {
     package = pkgs.neovim-nightly;
     enable = true;
-    # extraLuaConfig = ''
-    #   vim.g.sqlite_clib_path = "${pkgs.sqlite.out}/lib/libsqlite3.so"
-    #   require("willothy")
-    # '';
   };
 
   programs.ssh = {
     enable = true;
     extraConfig = ''
       Host *
-        IdentityAgent ~/.1password/agent.sock
+        IdentityAgent /home/willothy/.1password/agent.sock
     '';
   };
 
