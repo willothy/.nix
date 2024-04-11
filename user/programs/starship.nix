@@ -19,11 +19,20 @@
         "$python"
         "$nodejs"
         "$c"
+        "$fill"
+        "$shell"
         "$line_break"
         "$jobs"
         "$\{custom.vi_mode\}"
         "$character"
       ];
+      shell = {
+        disabled = false;
+        style = "blue";
+      };
+      fill = {
+        symbol = "  ";
+      };
       nix_shell = {
         impure_msg = "impure";
         pure_msg = "pure";
