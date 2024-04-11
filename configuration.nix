@@ -187,7 +187,7 @@ in {
   };
 
   programs.ssh = {
-    startAgent = true;
+    startAgent = false;
   };
 
   # Enable the OpenSSH daemon.
