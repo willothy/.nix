@@ -10,6 +10,7 @@
     gau = "git add --update";
     v = "nvim";
     ":q" = "exit";
+    cd = "z";
   };
 in {
   home = {
