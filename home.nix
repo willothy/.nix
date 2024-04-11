@@ -16,7 +16,26 @@ in {
   home.username = "willothy";
   home.homeDirectory = "/home/willothy";
 
-  home.packages = with pkgs; [ ];
+  home.packages = with pkgs; [
+    (nerdfonts.override {
+      fonts = [
+        "FiraCode"
+        "FiraMono"
+      ];
+    })
+    maple-mono-NF
+  ];
+
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    VISUAL = "nvim -b";
+    BROWSER = "brave";
+
+    # 1password ssh agent
+    SSH_AUTH_SOCK = "/home/willothy/.1password/agent.sock";
+  };
+
+  fonts.fontconfig.enable = true;
 
   # lua/plugins/* gets autoloaded by Lazy, so I use this to
   # do required nix-specific setup.
@@ -30,17 +49,8 @@ in {
   };
 
   home.file.".config/wezterm" = {
-    source = ./configs/wezterm/;
+    source = ./configs/wezterm;
     recursive = true;
-  }
-
-  home.sessionVariables = {
-    EDITOR = "nvim";
-    VISUAL = "nvim -b";
-    BROWSER = "brave";
-
-    # 1password ssh agent
-    SSH_AUTH_SOCK = "/home/willothy/.1password/agent.sock";
   };
 
   programs.wezterm = {

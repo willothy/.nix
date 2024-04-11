@@ -146,6 +146,7 @@ in {
     ];
   };
 
+  # Auto defrag disk
   services.btrfs.autoScrub = {
     enable = true;
     interval = "weekly";
@@ -156,6 +157,7 @@ in {
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  # Audio
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -167,7 +169,8 @@ in {
     enable = true;
     defaultEditor = true;
     configure = {
-      # Temporary config for initial nixos setup
+      # Basic global config for initial nixos setup
+      # and editing as root.
       customRC = ''
         set tabstop=2
         set shiftwidth=2
@@ -222,10 +225,19 @@ in {
     prompt.enable = true;
   };
 
+  # Global font config
+  fonts.enableDefaultPackages = true;
   fonts.packages = with pkgs; [
+    (nerdfonts.override {
+      fonts = [
+        "FiraCode"
+        "FiraMono"
+      ];
+    })
     maple-mono-NF
-    fira-code-nerdfont
   ];
+  fonts.fontDir.enable = true;
+  fonts.fontconfig.enable = true;
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
