@@ -8,6 +8,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    picom-flake = {
+      # url = "github:yshui/picom/next";
+      url = "github:FT-Labs/picom";
+    };
   };
 
   outputs =
@@ -44,6 +48,7 @@
           [
             (import ./overlays/awesome-git.nix)
             inputs.neovim-nightly-overlay.overlay
+            inputs.picom-flake.overlay."${system.system}"
           ];
 
         config = {
