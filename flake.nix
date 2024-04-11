@@ -16,10 +16,32 @@
 		home-manager,
 		...
 	}@inputs: let
-    system = "x86_64-linux";
+    system = {
+      system = "x86_64-linux";
+      hostname = "nostromo";
+      timezone = "America/Los_Angeles";
+      locale = "en_US.UTF-8";
+    };
+
+    user = rec {
+      username = "willothy";
+      name = "Will Hopkins";
+      email = "willothyh@gmail.com";
+      dotfilesDir = "~/.dotfiles/";
+      wm = "awesome";
+      wmType = "x11";
+      browser = "brave";
+      editor = "nvim";
+      editorVisual = "nvim -b";
+      terminal = "wezterm";
+      # Public key, obviously
+      sshSigningKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEuB3Fm5F9/qUWn2Ok7EXZc8OkKmvy6AHI+Wit0+XDiV";
+
+      homeDir = "/home/${username}";
+    };
 
 		pkgs = import nixpkgs {
-			inherit system;
+			inherit (system) system;
 
       overlays = [
         inputs.neovim-nightly-overlay.overlay
@@ -35,7 +57,8 @@
     nixosConfigurations = {
       nostromo = nixpkgs.lib.nixosSystem {
 				specialArgs = {
-					inherit system;
+          inherit system;
+          inherit user;
 				};
 
         modules = [
@@ -50,7 +73,10 @@
       willothy = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
-        #configuration.nixpkgs.overlays = overlays;
+        extraSpecialArgs = {
+          inherit system;
+          inherit user;
+        };
 
         modules = [
           ./home.nix

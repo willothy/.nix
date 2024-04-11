@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: let
+{ config, lib, pkgs, system, user, ... }: let
   shellAliases = {
     ll = "ls -l";
     la = "ls -a";
@@ -13,8 +13,8 @@
     cd = "z";
   };
 in {
-  home.username = "willothy";
-  home.homeDirectory = "/home/willothy";
+  home.username = user.username;
+  home.homeDirectory = user.homeDir;
 
   home.packages = with pkgs; [
     (nerdfonts.override {
@@ -27,12 +27,12 @@ in {
   ];
 
   home.sessionVariables = {
-    EDITOR = "nvim";
-    VISUAL = "nvim -b";
-    BROWSER = "brave";
+    EDITOR = user.editor;
+    VISUAL = user.editorVisual;
+    BROWSER = user.browser;
 
     # 1password ssh agent
-    SSH_AUTH_SOCK = "/home/willothy/.1password/agent.sock";
+    SSH_AUTH_SOCK = "${user.homeDir}/.1password/agent.sock";
   };
 
   fonts.fontconfig.enable = true;
@@ -82,16 +82,16 @@ in {
     enable = true;
     extraConfig = ''
       Host *
-        IdentityAgent /home/willothy/.1password/agent.sock
+        IdentityAgent ${user.homeDir}/.1password/agent.sock
     '';
   };
 
   programs.git = {
     enable = true;
-    userName = "Will Hopkins";
-    userEmail = "willothyh@gmail.com";
+    userName = user.name;
+    userEmail = user.email;
     signing = {
-      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEuB3Fm5F9/qUWn2Ok7EXZc8OkKmvy6AHI+Wit0+XDiV";
+      key = user.sshSigningKey;
       signByDefault = true;
     };
     delta = {

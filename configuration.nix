@@ -1,12 +1,5 @@
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
-{ config, lib, pkgs, ... }: let
-  hostName = "nostromo";
-  userName = "willothy";
-  timeZone = "America/Los_Angeles";
-in {
+{ config, lib, pkgs, user, system, ... }:
+{
   imports = [
     ./hardware-configuration.nix
   ];
@@ -66,15 +59,15 @@ in {
   };
 
   networking = {
-    inherit hostName;
+    hostName = system.hostname;
 
     networkmanager.enable = true;
   };
 
   # Set locale and timezone
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.defaultLocale = system.locale;
   time = {
-    inherit timeZone;
+    timeZone = system.timezone;
     # Fixes desync between Windows and Linux time tracking.
     hardwareClockInLocalTime = true;
   };
@@ -88,14 +81,21 @@ in {
   users = {
     defaultUserShell = pkgs.zsh;
 
-    users.willothy = {
-      isNormalUser = true;
-      initialPassword = "letmein";
+    users."${user.username}" = {
+      name = user.username;
+      description = user.name;
+      createHome = true;
+      openssh.authorizedKeys.keys = [
+        "${user.sshSigningKey}"
+      ];
       extraGroups = [
         "networkmanager"
         "audio"
+        "video"
         "wheel"
       ];
+      initialPassword = "letmein";
+      isNormalUser = true;
       packages = with pkgs; [
         brave
         gnome.nautilus
