@@ -356,6 +356,7 @@ in
         "$git_state"
         "$\{custom.sesh\}"
         "$battery"
+        "$nix_shell"
         "$rust"
         "$lua"
         "$python"
@@ -366,6 +367,13 @@ in
         "$\{custom.vi_mode\}"
         "$character"
       ];
+      nix_shell = {
+        impure_msg = "impure";
+        pure_msg = "pure";
+        unknown_msg = "unknown";
+        format = "[$symbol$state( \($name\))]($style)";
+        symbol = "󱄅 ";
+      };
       directory = {
         truncation_length = 4;
         style = "#5de4c7";
