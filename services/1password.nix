@@ -6,7 +6,7 @@
   programs._1password-gui = {
     enable = true;
     polkitPolicyOwners = [
-      user.username
+      "${user.username}"
     ];
   };
   environment.etc = {
