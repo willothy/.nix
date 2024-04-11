@@ -56,7 +56,9 @@
 
       nixosConfigurations = {
         nostromo = nixpkgs.lib.nixosSystem {
+
           specialArgs = {
+            inherit pkgs;
             inherit system;
             inherit user;
           };

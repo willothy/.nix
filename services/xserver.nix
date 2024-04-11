@@ -11,9 +11,8 @@
 
     videoDrivers = [ "nvidia" ];
 
-    #exportConfiguration = true;
-
     displayManager = {
+      defaultSession = "awesome";
       lightdm = {
         enable = true;
       };
@@ -21,6 +20,13 @@
       setupCommands = ''
         ${pkgs.xorg.xrandr}/bin/xrandr --output HDMI-0 --mode "1920x1080" --left-of DP-4 --output DP-4 --mode "2560x1080" --primary
       '';
+      session = [
+        {
+          manage = "desktop";
+          name = "awesome";
+          start = ''exec awesome'';
+        }
+      ];
     };
 
     xrandrHeads = [
