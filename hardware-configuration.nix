@@ -5,7 +5,8 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
@@ -14,50 +15,53 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-label/NIX-ROOT";
+    {
+      device = "/dev/disk/by-label/NIX-ROOT";
       fsType = "btrfs";
       options = [
         "ssd"
         "discard"
         "compress=lzo"
         "space_cache=v2"
-        "subvol=@" 
+        "subvol=@"
       ];
     };
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-label/NIX-ROOT";
-      fsType = "btrfs";
-      options = [ 
-        "ssd"
-        "discard"
-        "compress=lzo"
-        "space_cache=v2"
-        "subvol=@home" 
-      ];
-    };
-
-  fileSystems."/nix" =
-    { device = "/dev/disk/by-label/NIX-ROOT";
+    {
+      device = "/dev/disk/by-label/NIX-ROOT";
       fsType = "btrfs";
       options = [
         "ssd"
         "discard"
         "compress=lzo"
         "space_cache=v2"
-        "noatime" 
-        "subvol=@nix" 
+        "subvol=@home"
+      ];
+    };
+
+  fileSystems."/nix" =
+    {
+      device = "/dev/disk/by-label/NIX-ROOT";
+      fsType = "btrfs";
+      options = [
+        "ssd"
+        "discard"
+        "compress=lzo"
+        "space_cache=v2"
+        "noatime"
+        "subvol=@nix"
       ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-label/NIX-BOOT";
+    {
+      device = "/dev/disk/by-label/NIX-BOOT";
       fsType = "vfat";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-label/NIX-SWAP"; }
-    ];
+    [{ device = "/dev/disk/by-label/NIX-SWAP"; }];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

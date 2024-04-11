@@ -1,8 +1,4 @@
-{
-  pkgs,
-  lib,
-  ...
-}:
+{ pkgs, lib, ... }:
 {
   services.xserver = {
     enable = true;
@@ -30,11 +26,11 @@
 
     windowManager.awesome = {
       enable = true;
-     #luaModules = with pkgs.luajitPackages; [
-     #  luarocks
-     #  luadbi-mysql
-     #  lgi
-     #];
+      #luaModules = with pkgs.luajitPackages; [
+      #  luarocks
+      #  luadbi-mysql
+      #  lgi
+      #];
     };
 
     xrandrHeads = [

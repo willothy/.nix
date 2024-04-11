@@ -1,8 +1,4 @@
-{
-  pkgs,
-  lib,
-  ...
-}:
+{ pkgs, lib, ... }:
 {
   programs._1password = {
     enable = true;
@@ -27,11 +23,11 @@
     wants = [ "graphical-session.target" ];
     after = [ "graphical-session.target" ];
     serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs._1password-gui}/bin/1password --silent";
-        Restart = "on-failure";
-        RestartSec = 1;
-        TimeoutStopSec = 10;
-      };
+      Type = "simple";
+      ExecStart = "${pkgs._1password-gui}/bin/1password --silent";
+      Restart = "on-failure";
+      RestartSec = 1;
+      TimeoutStopSec = 10;
+    };
   };
 }

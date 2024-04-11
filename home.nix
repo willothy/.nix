@@ -1,4 +1,5 @@
-{ config, lib, pkgs, system, user, ... }: let
+{ config, lib, pkgs, system, user, ... }:
+let
   shellAliases = {
     ll = "ls -l";
     la = "ls -a";
@@ -12,7 +13,8 @@
     ":q" = "exit";
     cd = "z";
   };
-in {
+in
+{
   home.username = user.username;
   home.homeDirectory = user.homeDir;
 
@@ -251,7 +253,7 @@ in {
     enable = true;
     inherit shellAliases;
   };
-  programs.zsh  = {
+  programs.zsh = {
     enable = true;
     inherit shellAliases;
   };
