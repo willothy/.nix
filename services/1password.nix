@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, user, ... }:
 {
   programs._1password = {
     enable = true;
@@ -6,14 +6,12 @@
   programs._1password-gui = {
     enable = true;
     polkitPolicyOwners = [
-      "willothy"
+      user.username
     ];
   };
   environment.etc = {
     "1password/custom_allowed_browsers" = {
-      text = ''
-        brave
-      '';
+      text = "${user.browser}";
       mode = "0755";
     };
   };
