@@ -1,4 +1,4 @@
-{ pkgs, user, ... }:
+{ pkgs, lib, user, ... }:
 let
   shellAliases = {
     ll = "ls -l";
@@ -32,6 +32,8 @@ in
     })
     maple-mono-NF
     awesome-luajit-git
+    tela-icon-theme
+    whitesur-cursors
   ];
 
   home.sessionVariables = {
@@ -43,7 +45,32 @@ in
     SSH_AUTH_SOCK = "${user.homeDir}/.1password/agent.sock";
   };
 
+  home.pointerCursor = {
+    gtk.enable = true;
+    x11.enable = true;
+    name = "WhiteSur-cursors";
+    package = pkgs.whitesur-cursors;
+    # size = 32;
+  };
+
   fonts.fontconfig.enable = true;
+
+  gtk = {
+    enable = true;
+    iconTheme = {
+      name = "Tela";
+      package = pkgs.tela-icon-theme;
+    };
+    cursorTheme = {
+      name = "WhiteSur-cursors";
+      package = pkgs.whitesur-cursors;
+    };
+  };
+
+  qt = {
+    enable = true;
+    platformTheme = "gtk3";
+  };
 
   programs.atuin = {
     enable = true;
