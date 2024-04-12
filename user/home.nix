@@ -63,7 +63,16 @@ in
     settings = {
       auto_sync = true;
       sync_frequency = "30m";
-      style = "auto";
+      sync = {
+        record = true;
+      };
+      keymap_mode = "vim-insert";
+      keymap_cursor = {
+        vim_insert = "steady-bar";
+        vim_normal = "steady-block";
+      };
+      style = "compact";
+      inline_height = 12;
     };
     flags = [
       "--disable-up-arrow"
@@ -80,9 +89,9 @@ in
 
   programs.fzf = {
     enable = true;
-    enableFishIntegration = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
+    # enableFishIntegration = true;
+    # enableBashIntegration = true;
+    # enableZshIntegration = true;
   };
   programs.zoxide = {
     enable = true;
