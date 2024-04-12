@@ -89,7 +89,9 @@ in
     enableBashIntegration = true;
     enableZshIntegration = true;
     enableFishIntegration = true;
-    options = [ ];
+    options = [
+      "--cmd cd"
+    ];
   };
   programs.eza = {
     enable = true;
