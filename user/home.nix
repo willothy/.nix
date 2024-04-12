@@ -163,6 +163,11 @@ in
       set fish_cursor_insert line
       set fish_cursor_visual block
       set fish_vi_force_cursor 1
+
+      bind -e -M insert \t
+      bind -M insert \t forward-word
+      bind -M insert -k up history-prefix-search-backward
+      bind -M insert -k down history-prefix-search-forward
     '';
   };
   programs.bash = {
