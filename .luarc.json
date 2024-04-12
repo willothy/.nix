@@ -1,0 +1,17 @@
+{
+  "runtime.version": "Lua 5.4",
+  "diagnostics.globals": [
+    "awesome",
+    "client",
+    "mouse",
+    "mousegrabber",
+    "root",
+    "screen",
+    "tag"
+  ],
+  "workspace.library": [
+    "./types/",
+    "./"
+  ],
+    "completion.autoRequire": false
+}

@@ -1,0 +1,5 @@
+require("config.keymap.general")
+require("config.keymap.launcher")
+require("config.keymap.media")
+require("config.keymap.tags")
+require("config.keymap.layout")
