@@ -114,7 +114,7 @@ function icon_theme:get_client_icon_path(client, callback)
         run(next, ico)
       end)
     end
-    if not called then
+    if next and not called then
       run(next, nil)
     end
   end
