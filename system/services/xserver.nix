@@ -21,7 +21,6 @@
       lightdm = {
         enable = true;
       };
-      # Fixes xrandrHeads order, which seems to be broken
       setupCommands = ''
         ${pkgs.autorandr}/bin/autorandr --change
       '';
@@ -33,13 +32,5 @@
         }
       ];
     };
-
-    # xrandrHeads = [
-    #   "HDMI-0"
-    #   {
-    #     output = "DP-4";
-    #     primary = true;
-    #   }
-    # ];
   };
 }
