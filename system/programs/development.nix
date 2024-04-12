@@ -7,6 +7,10 @@
     gcc
     luajit
 
+    # Language servers / linters / formatters
+    lua-language-server
+    stylua
+
     # Build tools
     gnumake
     cmake
