@@ -5,5 +5,6 @@
     ./rofi.nix
     ./starship.nix
     ./wezterm.nix
+    ./awesomewm.nix
   ];
 }

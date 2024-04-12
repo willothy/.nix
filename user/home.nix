@@ -45,16 +45,6 @@ in
 
   fonts.fontconfig.enable = true;
 
-  xsession.windowManager.awesome = {
-    package = pkgs.awesome-luajit-git;
-    enable = true;
-    luaModules = with pkgs.luajitPackages; [
-      luarocks
-      luadbi-mysql
-      lgi
-    ];
-  };
-
   programs.atuin = {
     enable = true;
     enableBashIntegration = true;
