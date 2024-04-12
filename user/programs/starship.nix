@@ -121,8 +121,10 @@
         disabled = false;
         success_symbol = "[->](green)";
         error_symbol = "[->](red)";
-        vimcmd_symbol = "[<-](green)";
-        vimcmd_visual_symbol = "[<-](yellow)";
+        vimcmd_symbol = "[->](green)";
+        vimcmd_visual_symbol = "[->](yellow)";
+        # vimcmd_symbol = "[<-](green)";
+        # vimcmd_visual_symbol = "[<-](yellow)";
       };
     };
   };

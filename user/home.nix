@@ -68,6 +68,7 @@ in
       };
       keymap_mode = "vim-insert";
       keymap_cursor = {
+        emacs = "steady-block";
         vim_insert = "steady-bar";
         vim_normal = "steady-block";
       };
@@ -137,6 +138,13 @@ in
   programs.fish = {
     enable = true;
     inherit shellAliases;
+    shellInitLast = ''
+      fish_vi_cursor
+      set fish_cursor_default block
+      set fish_cursor_insert line
+      set fish_cursor_visual block
+      set fish_vi_force_cursor 1
+    '';
   };
   programs.bash = {
     enable = true;

@@ -267,5 +267,6 @@ table.insert(config.hyperlink_rules, {
 config.warn_about_missing_glyphs = false
 
 config.enable_kitty_keyboard = true
+-- config.enable_csi_u_key_encoding = true
 
 return config
