@@ -47,10 +47,10 @@ in
 
   home.pointerCursor = {
     gtk.enable = true;
-    x11.enable = true;
+    x11.enable = false;
     name = "WhiteSur-cursors";
     package = pkgs.whitesur-cursors;
-    # size = 32;
+    size = 24;
   };
 
   fonts.fontconfig.enable = true;
