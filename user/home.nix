@@ -139,6 +139,8 @@ in
     enable = true;
     inherit shellAliases;
     shellInitLast = ''
+      set -g fish_greeting
+
       fish_vi_cursor
       set fish_cursor_default block
       set fish_cursor_insert line
