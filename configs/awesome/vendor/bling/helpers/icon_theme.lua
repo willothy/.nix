@@ -19,6 +19,7 @@ local function get_icon_by_pid_command(self, client, apps, cb)
       string.format("ps -p %d -o comm=", pid),
       function(out, err, ret, exitcode)
         if exitcode ~= 0 then
+          cb(nil)
           return
         end
 
@@ -31,8 +32,11 @@ local function get_icon_by_pid_command(self, client, apps, cb)
             return
           end
         end
+        cb(nil)
       end
     )
+  else
+    cb(nil)
   end
 end
 
@@ -47,6 +51,7 @@ local function get_icon_by_icon_name(self, client, apps, cb)
       end
     end
   end
+  cb(nil)
 end
 
 local function get_icon_by_class(self, client, apps, cb)
@@ -77,7 +82,10 @@ local function get_icon_by_class(self, client, apps, cb)
           return
         end
       end
+      cb(nil)
     end
+  else
+    cb(nil)
   end
 end
 
@@ -107,15 +115,10 @@ function icon_theme:get_client_icon_path(client, callback)
       return
     end
     local next, thunk = next(thunks, last)
-    local called = false
     if thunk then
       thunk(self, client, apps, function(ico)
-        called = true
         run(next, ico)
       end)
-    end
-    if thunk == nil or not called then
-      run(next, nil)
     end
   end
 
