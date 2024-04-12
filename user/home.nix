@@ -11,7 +11,7 @@ let
     gau = "git add --update";
     v = "nvim";
     ":q" = "exit";
-    cd = "z";
+    #cd = "z";
   };
 in
 {
@@ -133,6 +133,9 @@ in
   };
   programs.zsh = {
     enable = true;
+    # initExtraFirst = ''
+    #   exec fish
+    # '';
     inherit shellAliases;
   };
 

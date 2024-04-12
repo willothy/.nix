@@ -7,5 +7,7 @@
     ./security.nix
     ./fonts.nix
     ./refind.nix
+    ./bluetooth.nix
+    ./autorandr.nix
   ];
 }

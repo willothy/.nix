@@ -71,6 +71,7 @@
     users."${user.username}" = {
       name = user.username;
       description = user.name;
+      shell = pkgs.fish;
       createHome = true;
       openssh.authorizedKeys.keys = [
         "${user.sshSigningKey}"
@@ -107,6 +108,7 @@
     enableSSHSupport = false;
   };
 
+  programs.fish.enable = true;
   programs.zsh.enable = true;
   programs.git = {
     enable = true;
