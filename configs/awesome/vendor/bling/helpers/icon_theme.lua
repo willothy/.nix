@@ -107,14 +107,11 @@ function icon_theme:get_client_icon_path(client, callback)
       return
     end
     local next, thunk = next(thunks, last)
-    local called = false
     if thunk then
       thunk(self, client, apps, function(ico)
-        called = true
         run(next, ico)
       end)
-    end
-    if next and not called then
+    elseif next then
       run(next, nil)
     end
   end
