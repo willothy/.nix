@@ -13,9 +13,6 @@ end
 
 config.front_end = "WebGpu"
 
-local function get_proc_title(pane)
-	return (pane.title or pane:get_foreground_process_name()):gsub("^%s+", ""):gsub("%s+$", ""):match("[^/]+$")
-end
 
 config.animation_fps = 30
 config.max_fps = 60
@@ -80,7 +77,25 @@ config.keys = {}
 nvim.apply_mappings(config.keys)
 keymap.apply_mappings(config.keys)
 
-wezterm.on("format-tab-title", function(tab, _tabs, _panes, _config, hover, _max_width)
+-- pane_info.foreground_process_name isn't helpful on NixOS because of store paths.
+-- calling get_foreground_process_info is supposedly slow, so cache the results by
+-- in a map of foreground_process_name -> get_foregoround_process_info().name.
+local pane_cache = {}
+
+local function pane_cache_get(pane_info)
+  local proc_name = pane_info.foreground_process_name
+  if pane_cache[proc_name] then
+    return pane_cache[proc_name]
+  end
+
+  local title = wezterm.mux.get_pane(pane_info.pane_id):get_foreground_process_info().name
+
+  pane_cache[proc_name] = title
+
+  return title
+end
+
+wezterm.on("format-tab-title", function(tab, tabs, panes, _config, hover, _max_width)
 	local has_unseen_output = false
 	for _, pane in ipairs(tab.panes) do
 		if pane.has_unseen_output then
@@ -88,30 +103,16 @@ wezterm.on("format-tab-title", function(tab, _tabs, _panes, _config, hover, _max
 			break
 		end
 	end
-	local proc_title = get_proc_title(tab.active_pane)
 
-	local icon
-	if process_icons[proc_title] ~= nil then
-		icon = wezterm.format({
-			{ Text = " " },
-			process_icons[proc_title],
-			{ Text = " " },
-		})
-	else
-		icon = wezterm.format({
-			{ Text = string.format(" %s", proc_title) },
-		})
-	end
 	local title = {}
-	if hover then
-		table.insert(title, {
-			Background = { Color = "#2a2e36" },
-		})
-	else
-		table.insert(title, {
-			Background = { Color = "#1a1b26" },
-		})
-	end
+  table.insert(title, {
+    Background = { Color = "#1a1b26" },
+  })
+  if tab.tab_index == 0 then
+    table.insert(title, {
+      Text = " ",
+    })
+  end
 	if has_unseen_output then
 		table.insert(title, {
 			Foreground = { Color = palette.lemon_chiffon },
@@ -125,52 +126,67 @@ wezterm.on("format-tab-title", function(tab, _tabs, _panes, _config, hover, _max
 			Foreground = { Color = "#9196c2" },
 		})
 	end
-	table.insert(title, {
-		Text = icon,
-	})
+
+	local proc_title = pane_cache_get(tab.active_pane) or "bruh"
+
+	if process_icons[proc_title] ~= nil then
+    table.insert(title, {
+      Text = wezterm.format({
+        process_icons[proc_title],
+        { Text = " " },
+      }),
+    })
+  else
+    table.insert(title, {
+      Text = wezterm.format({
+        { Text = "󰧟" },
+        { Text = " " },
+      }),
+    })
+	end
 	table.insert(title, {
 		Foreground = {
 			Color = "#9196c2",
 		},
 	})
-	if tab.tab_title == "" then
+
+	if hover then
 		table.insert(title, {
-			Text = proc_title or "",
-		})
-	else
-		table.insert(title, {
-			Text = tab.tab_title,
+			Attribute = { Underline = "Single" },
 		})
 	end
-	table.insert(title, {
-		Text = " ",
-	})
+  table.insert(title, {
+    Text = proc_title
+  })
+  table.insert(title, {
+    Attribute = { Underline = "None" },
+  })
+  if tab.tab_index + 1 < #tabs then
+    table.insert(title, {
+      Text = " ",
+    })
+  end
 	return title
 end)
 
 wezterm.on("update-right-status", function(window, pane)
+  local nvim_icon = ""
+  if pane:get_user_vars().IS_NVIM == "true" then
+    nvim_icon = " "
+  end
+  local name = pane:get_user_vars().sesh_name
+  if name and name ~= "" then
+    name = string.format("%s %s", name, "∘")
+  else
+    name = ""
+  end
+
 	window:set_right_status(wezterm.format({
 		{ Attribute = { Intensity = "Bold" } },
 		{ Foreground = { Color = "#9196c2" } },
-		{
-			Text = (function()
-				if pane:get_user_vars().IS_NVIM == "true" then
-					return ""
-				else
-					return ""
-				end
-			end)(),
-		},
-		{
-			Text = (function()
-				local name = pane:get_user_vars().sesh_name
-				if name and name ~= "" then
-					return string.format("%s %s", name, "∘")
-				end
-				return ""
-			end)(),
-		},
-		{ Text = wezterm.strftime("%l:%M %p") },
+		{ Text = nvim_icon },
+		{ Text = name },
+		{ Text = wezterm.strftime("%l:%M %p ") },
 	}))
 end)
 
@@ -187,20 +203,6 @@ wezterm.on("new-tab-button-click", function(window, pane, button, _default_actio
 		return false
 	end
 end)
-
--- wezterm.on("window-focus-changed", function(window)
--- 	we["WEZTERM_TAB"] = window:active_tab():tab_id()
--- end)
-
--- local mux = wezterm.mux
--- wezterm.on("gui-attached", function()
--- 	local workspace = mux.get_active_workspace()
--- 	for _, win in ipairs(mux.all_windows()) do
--- 		if win:get_workspace() == workspace then
--- 			config.set_environment_variables.WEZTERM_TAB = win:active_tab()
--- 		end
--- 	end
--- end)
 
 config.hyperlink_rules = {
 	-- Matches: a URL in parens: (URL)
