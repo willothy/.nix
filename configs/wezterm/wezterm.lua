@@ -94,7 +94,7 @@ local function pane_cache_get(pane_info)
 	return title
 end
 
-wezterm.on("format-tab-title", function(tab, tabs, panes, _config, hover, _max_width)
+wezterm.on("format-tab-title", function(tab, tabs, _panes, _config, hover, _max_width)
 	local has_unseen_output = false
 	for _, pane in ipairs(tab.panes) do
 		if pane.has_unseen_output then
