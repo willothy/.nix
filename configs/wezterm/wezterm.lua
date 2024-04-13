@@ -201,12 +201,12 @@ wezterm.on("augment-command-palette", function(_window, _pane)
 	}
 end)
 
-wezterm.on("new-tab-button-click", function(window, pane, button, _default_action)
-	if button == "Left" then
-		window:perform_action(sesh.create.action, pane)
-		return false
-	end
-end)
+-- wezterm.on("new-tab-button-click", function(window, pane, button, _default_action)
+-- 	if button == "Left" then
+-- 		window:perform_action(sesh.create.action, pane)
+-- 		return false
+-- 	end
+-- end)
 
 config.hyperlink_rules = {
 	-- Matches: a URL in parens: (URL)
