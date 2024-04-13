@@ -12,6 +12,7 @@
       # url = "github:yshui/picom/next";
       url = "github:FT-Labs/picom";
     };
+    apple-fonts-flake.url = "github:Lyndeno/apple-fonts.nix";
   };
 
   outputs =
@@ -50,6 +51,9 @@
             (import ./overlays/awesome-git.nix)
             inputs.neovim-nightly-overlay.overlay
             inputs.picom-flake.overlay."${system.system}"
+            (final: prev: {
+              apple-fonts = inputs.apple-fonts-flake.packages."${system.system}";
+            })
           ];
 
         config = {
@@ -62,11 +66,11 @@
 
       nixosConfigurations = {
         nostromo = nixpkgs.lib.nixosSystem {
-
           specialArgs = {
             inherit pkgs;
             inherit system;
             inherit user;
+            # apple-fonts = inputs.apple-fonts-flake.packages."${system.system}";
           };
 
           modules = [

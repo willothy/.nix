@@ -1,4 +1,4 @@
-{ pkgs, lib, user, ... }:
+{ pkgs, user, ... }:
 let
   shellAliases = {
     ll = "ls -l";

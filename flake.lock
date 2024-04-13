@@ -1,5 +1,29 @@
 {
   "nodes": {
+    "apple-fonts-flake": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": "nixpkgs",
+        "ny": "ny",
+        "sf-arabic": "sf-arabic",
+        "sf-compact": "sf-compact",
+        "sf-mono": "sf-mono",
+        "sf-pro": "sf-pro"
+      },
+      "locked": {
+        "lastModified": 1705496891,
+        "narHash": "sha256-lLX87aJ9oUT3u0Iaf60xKIJ2RQNt3v4Ne2cvSWyaS7U=",
+        "owner": "Lyndeno",
+        "repo": "apple-fonts.nix",
+        "rev": "e6ffbc887752ba0fe035fbcc8b282555804dd3f6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Lyndeno",
+        "repo": "apple-fonts.nix",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -63,6 +87,24 @@
         "systems": "systems"
       },
       "locked": {
+        "lastModified": 1710146030,
+        "narHash": "sha256-SZ5L6eA7HJ/nmkzGG7/ISclqe6oZdOZTNoesiInkXPQ=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "b1d9ab70662946ef0850d488da1c9019f3a9752a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_2": {
+      "inputs": {
+        "systems": "systems_2"
+      },
+      "locked": {
         "lastModified": 1701680307,
         "narHash": "sha256-kAuep2h5ajznlPMD9rnQyffWG8EM/C73lejGofXvdM8=",
         "owner": "numtide",
@@ -76,9 +118,9 @@
         "type": "github"
       }
     },
-    "flake-utils_2": {
+    "flake-utils_3": {
       "inputs": {
-        "systems": "systems_2"
+        "systems": "systems_3"
       },
       "locked": {
         "lastModified": 1705309234,
@@ -161,7 +203,7 @@
     },
     "neovim-flake": {
       "inputs": {
-        "flake-utils": "flake-utils",
+        "flake-utils": "flake-utils_2",
         "nixpkgs": [
           "neovim-nightly-overlay",
           "nixpkgs"
@@ -189,7 +231,7 @@
         "flake-parts": "flake-parts",
         "hercules-ci-effects": "hercules-ci-effects",
         "neovim-flake": "neovim-flake",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
         "lastModified": 1712880226,
@@ -207,6 +249,22 @@
     },
     "nixpkgs": {
       "locked": {
+        "lastModified": 1687807295,
+        "narHash": "sha256-7TUD0p0m4mZpIi1O+Cyk5NCqpJUnhv/CJOAuHOndjao=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "6b3d1b1cf13f407fef5e634b224d575eb7211975",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
         "lastModified": 1712849433,
         "narHash": "sha256-flQtf/ZPJgkLY/So3Fd+dGilw2DKIsiwgMEn7BbBHL0=",
         "owner": "NixOS",
@@ -221,7 +279,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_2": {
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1712791164,
         "narHash": "sha256-3sbWO1mbpWsLepZGbWaMovSO7ndZeFqDSdX0hZ9nVyw=",
@@ -236,7 +294,7 @@
         "type": "indirect"
       }
     },
-    "nixpkgs_3": {
+    "nixpkgs_4": {
       "locked": {
         "lastModified": 1705856552,
         "narHash": "sha256-JXfnuEf5Yd6bhMs/uvM67/joxYKoysyE3M2k6T3eWbg=",
@@ -250,11 +308,23 @@
         "type": "indirect"
       }
     },
+    "ny": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-phACDdjI8RX6yD77PSmFcsriagt+2UuySD7+WEzdzGo=",
+        "type": "file",
+        "url": "https://devimages-cdn.apple.com/design/resources/download/NY.dmg"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://devimages-cdn.apple.com/design/resources/download/NY.dmg"
+      }
+    },
     "picom-flake": {
       "inputs": {
-        "flake-utils": "flake-utils_2",
+        "flake-utils": "flake-utils_3",
         "git-ignore-nix": "git-ignore-nix",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_4"
       },
       "locked": {
         "lastModified": 1708123237,
@@ -272,10 +342,59 @@
     },
     "root": {
       "inputs": {
+        "apple-fonts-flake": "apple-fonts-flake",
         "home-manager": "home-manager",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs_3",
         "picom-flake": "picom-flake"
+      }
+    },
+    "sf-arabic": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-CPewXMGI78xHsjdRU8ZJIBSYjh5UY6UW21ihE4B+Bkk=",
+        "type": "file",
+        "url": "https://devimages-cdn.apple.com/design/resources/download/SF-Arabic.dmg"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://devimages-cdn.apple.com/design/resources/download/SF-Arabic.dmg"
+      }
+    },
+    "sf-compact": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-nJkPlddKF2dIwj+6jiVvS60hDcGAMasEOWemUwBS2mQ=",
+        "type": "file",
+        "url": "https://devimages-cdn.apple.com/design/resources/download/SF-Compact.dmg"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://devimages-cdn.apple.com/design/resources/download/SF-Compact.dmg"
+      }
+    },
+    "sf-mono": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-KT1RXz3NcWPetyxVlgMfh/dsoznpI3lMnplz6V7PCUU=",
+        "type": "file",
+        "url": "https://devimages-cdn.apple.com/design/resources/download/SF-Mono.dmg"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://devimages-cdn.apple.com/design/resources/download/SF-Mono.dmg"
+      }
+    },
+    "sf-pro": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-cn8ae2UddF8Pru6i3fSG2Wki5sf1DmWKD2FmKMsoeAA=",
+        "type": "file",
+        "url": "https://devimages-cdn.apple.com/design/resources/download/SF-Pro.dmg"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://devimages-cdn.apple.com/design/resources/download/SF-Pro.dmg"
       }
     },
     "systems": {
@@ -294,6 +413,21 @@
       }
     },
     "systems_2": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_3": {
       "locked": {
         "lastModified": 1681028828,
         "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
