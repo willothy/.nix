@@ -34,6 +34,8 @@ in
     awesome-luajit-git
     tela-icon-theme
     whitesur-cursors
+
+    gnome.gnome-screenshot
   ];
 
   home.sessionVariables = {
