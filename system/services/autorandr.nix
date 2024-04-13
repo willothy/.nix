@@ -13,11 +13,13 @@
           position = "1920x0";
           mode = "2560x1080";
           rate = "60.00";
+          dpi = 96;
         };
         "HDMI-0" = {
           position = "0x0";
           mode = "1920x1080";
           rate = "60.00";
+          dpi = 96;
         };
       };
     };
