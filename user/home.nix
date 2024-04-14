@@ -31,11 +31,18 @@ in
       ];
     })
     maple-mono-NF
-    awesome-luajit-git
     tela-icon-theme
     whitesur-cursors
 
+    tokyonight-gtk-theme
+    colloid-gtk-theme
+
+    lxappearance
+
+    awesome-luajit-git
+
     gnome.gnome-screenshot
+    gnome.nautilus
   ];
 
   home.sessionVariables = {
@@ -59,6 +66,10 @@ in
 
   gtk = {
     enable = true;
+    theme = {
+      name = "Colloid-Dark";
+      package = pkgs.colloid-gtk-theme;
+    };
     iconTheme = {
       name = "Tela";
       package = pkgs.tela-icon-theme;
@@ -66,6 +77,10 @@ in
     cursorTheme = {
       name = "WhiteSur-cursors";
       package = pkgs.whitesur-cursors;
+    };
+    font = {
+      name = "SF Pro";
+      package = pkgs.apple-fonts.sf-pro;
     };
   };
 
