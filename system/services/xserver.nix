@@ -20,6 +20,31 @@
     displayManager = {
       lightdm = {
         enable = true;
+        greeters = {
+          gtk = {
+            enable = true;
+            theme = {
+              name = "Colloid-Dark";
+              package = pkgs.colloid-gtk-theme;
+            };
+            iconTheme = {
+              name = "Tela";
+              package = pkgs.tela-icon-theme;
+            };
+            cursorTheme = {
+              name = "WhiteSur-cursors";
+              package = pkgs.whitesur-cursors;
+            };
+            indicators = [
+              "~host"
+              "~spacer"
+              "~clock"
+              "~spacer"
+              "~session"
+              "~power"
+            ];
+          };
+        };
       };
       setupCommands = ''
         ${pkgs.autorandr}/bin/autorandr --change

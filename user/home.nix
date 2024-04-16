@@ -185,6 +185,8 @@ in
       bind -M insert \t forward-word
       bind -M insert -k up history-prefix-search-backward
       bind -M insert -k down history-prefix-search-forward
+
+      source ${user.homeDir}/.config/op/plugins.sh
     '';
   };
   programs.bash = {
