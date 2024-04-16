@@ -21,6 +21,8 @@
     allowUnfree = true;
   };
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   boot.loader.efi = {
     canTouchEfiVariables = true;
     efiSysMountPoint = "/boot";
