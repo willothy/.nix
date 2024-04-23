@@ -5,6 +5,7 @@
     python312
     rustup
     gcc
+    llvmPackages_18.clang-unwrapped
     luajit
 
     # Language servers / linters / formatters
