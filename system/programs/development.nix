@@ -11,6 +11,7 @@
     # Language servers / linters / formatters
     lua-language-server
     stylua
+    uncrustify
 
     # Build tools
     gnumake
