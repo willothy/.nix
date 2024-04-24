@@ -16,6 +16,7 @@
     # Build tools
     gnumake
     cmake
+    ccache
 
     # Libraries
     sqlite
