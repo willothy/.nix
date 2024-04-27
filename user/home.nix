@@ -49,6 +49,7 @@ in
     EDITOR = user.editor;
     VISUAL = user.editorVisual;
     BROWSER = user.browser;
+    PAGER = user.pager;
 
     # 1password ssh agent
     SSH_AUTH_SOCK = "${user.homeDir}/.1password/agent.sock";

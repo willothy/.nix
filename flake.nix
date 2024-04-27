@@ -36,6 +36,7 @@
         browser = "brave";
         editor = "nvim";
         editorVisual = "nvim -b";
+        pager = "delta";
         terminal = "wezterm";
         # Public key, obviously
         sshSigningKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEuB3Fm5F9/qUWn2Ok7EXZc8OkKmvy6AHI+Wit0+XDiV";
