@@ -5,6 +5,7 @@
     python312
     rustup
     gcc
+    go
     llvmPackages_18.clang-unwrapped
     luajit
 
