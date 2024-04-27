@@ -43,6 +43,8 @@ in
 
     gnome.gnome-screenshot
     gnome.nautilus
+
+    spotify
   ];
 
   home.sessionVariables = {

@@ -40,21 +40,19 @@ local function get_icon_by_pid_command(self, client, apps, cb)
   end
 end
 
-local function get_icon_by_icon_name(self, client, apps, cb)
+local function get_icon_by_icon_name(self, client, apps)
   local icon_name = client.icon_name and client.icon_name:lower() or nil
   if icon_name ~= nil then
     for _, app in ipairs(apps) do
       local name = app:get_name():lower()
       if name and name:find(icon_name, 1, true) then
-        cb(self:get_gicon_path(app:get_icon()))
-        return
+        return self:get_gicon_path(app:get_icon())
       end
     end
   end
-  cb(nil)
 end
 
-local function get_icon_by_class(self, client, apps, cb)
+local function get_icon_by_class(self, client, apps)
   if client.class ~= nil then
     local class = name_lookup[client.class] or client.class
 
@@ -78,51 +76,33 @@ local function get_icon_by_class(self, client, apps, cb)
       for _, app in ipairs(apps) do
         local id = app:get_id():lower()
         if id and id:find(possible_icon_name, 1, true) then
-          cb(self:get_gicon_path(app:get_icon()))
-          return
+          return self:get_gicon_path(app:get_icon())
         end
       end
-      cb(nil)
     end
-  else
-    cb(nil)
   end
 end
 
 function icon_theme:get_client_icon_path(client, callback)
   local apps = Gio.AppInfo.get_all()
 
-  local thunks = {
-    get_icon_by_pid_command,
-    get_icon_by_icon_name,
-    get_icon_by_class,
-    function(_, _, _, cb)
-      cb(client.icon)
-    end,
-    function(_, _, _, cb)
-      cb(self:choose_icon({
-        "window",
-        "window-manager",
-        "xfwm4-default",
-        "window_list",
-      }))
-    end,
-  }
-
-  local function run(last, icon)
-    if icon and icon ~= "" then
+  get_icon_by_pid_command(self, client, apps, function(icon)
+    if icon then
       callback(icon)
       return
     end
-    local next, thunk = next(thunks, last)
-    if thunk then
-      thunk(self, client, apps, function(ico)
-        run(next, ico)
-      end)
-    end
-  end
 
-  run()
+    icon = get_icon_by_class(self, client, apps)
+    if icon then
+      callback(icon)
+      return
+    end
+    icon = get_icon_by_icon_name(self, client, apps)
+    if icon then
+      callback(icon)
+      return
+    end
+  end)
 end
 
 function icon_theme:choose_icon(icons_names)
@@ -133,13 +113,11 @@ function icon_theme:choose_icon(icons_names)
       return icon_path
     end
   end
-
-  return ""
 end
 
 function icon_theme:get_gicon_path(gicon)
   if gicon == nil then
-    return ""
+    return
   end
 
   local icon_info = self.gtk_theme:lookup_by_gicon(gicon, self.icon_size, 0)
@@ -149,8 +127,6 @@ function icon_theme:get_gicon_path(gicon)
       return icon_path
     end
   end
-
-  return ""
 end
 
 function icon_theme:get_icon_path(icon_name)
@@ -161,8 +137,6 @@ function icon_theme:get_icon_path(icon_name)
       return icon_path
     end
   end
-
-  return ""
 end
 
 local function new(theme_name, icon_size)
@@ -170,7 +144,7 @@ local function new(theme_name, icon_size)
   gtable.crush(ret, icon_theme, true)
 
   ret.name = theme_name or nil
-  ret.icon_size = icon_size or 48
+  ret.icon_size = icon_size or 64
 
   if theme_name then
     ret.gtk_theme = Gtk.IconTheme.new()
