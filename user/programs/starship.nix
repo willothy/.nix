@@ -104,8 +104,9 @@
         format = "[$symbol]($style) ";
       };
       python = {
+        symbol = "󰌠";
         style = "yellow";
-        format = "[$symbol]($style) ";
+        format = "[$symbol $virtualenv]($style) ";
       };
       jobs = {
         style = "blue";
