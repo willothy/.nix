@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   environment.systemPackages = with pkgs; [
     # Languages
-    nodejs_21
+    nodejs
     python312
     rustup
     gcc
