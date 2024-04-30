@@ -20,6 +20,10 @@
     ccache
     pkg-config
 
+    # Deployment
+    docker
+    docker-compose
+
     # Libraries
     sqlite
   ];
