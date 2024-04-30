@@ -59,6 +59,13 @@
     networkmanager.enable = true;
   };
 
+  virtualization = {
+    docker = {
+      enable = true;
+      storageDriver = "btrfs";
+    };
+  };
+
   # Set locale and timezone
   i18n.defaultLocale = system.locale;
   time = {
@@ -89,6 +96,7 @@
         "audio"
         "video"
         "wheel"
+        "docker"
       ];
       initialPassword = "letmein";
       isNormalUser = true;
