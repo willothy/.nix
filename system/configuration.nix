@@ -59,7 +59,7 @@
     networkmanager.enable = true;
   };
 
-  virtualization = {
+  virtualisation = {
     docker = {
       enable = true;
       storageDriver = "btrfs";
