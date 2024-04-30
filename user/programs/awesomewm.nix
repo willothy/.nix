@@ -6,6 +6,7 @@
       luarocks
       luadbi-mysql
       lgi
+      magick
     ];
   };
 

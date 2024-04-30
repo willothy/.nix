@@ -18,6 +18,7 @@
     gnumake
     cmake
     ccache
+    pkg-config
 
     # Libraries
     sqlite

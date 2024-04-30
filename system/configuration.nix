@@ -28,6 +28,12 @@
     efiSysMountPoint = "/boot";
   };
 
+  # nixgl.auto = {
+  #   nixGLDefault = true;
+  #   nixGLNvidia = true;
+  #   nixVulkanNvidia = true;
+  # };
+
   hardware = {
     opengl = {
       enable = true;

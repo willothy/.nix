@@ -13,10 +13,11 @@
       url = "github:FT-Labs/picom";
     };
     apple-fonts-flake.url = "github:Lyndeno/apple-fonts.nix";
+    nixgl.url = "github:nix-community/nixGL";
   };
 
   outputs =
-    { self, nixpkgs, home-manager, ... }@inputs:
+    { self, nixpkgs, home-manager, nixgl, ... }@inputs:
     let
       system = {
         system = "x86_64-linux";
@@ -55,6 +56,7 @@
             (final: prev: {
               apple-fonts = inputs.apple-fonts-flake.packages."${system.system}";
             })
+            nixgl.overlay
           ];
 
         config = {

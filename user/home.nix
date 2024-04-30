@@ -3,6 +3,8 @@ let
   shellAliases = {
     ll = "ls -l";
     la = "ls -a";
+    ls = "eza -s type";
+    lt = "eza --tree -s type";
     ".." = "cd ..";
     gs = "git status";
     gc = "git commit";
@@ -33,6 +35,7 @@ in
     maple-mono-NF
     tela-icon-theme
     whitesur-cursors
+    imagemagick
 
     tokyonight-gtk-theme
     colloid-gtk-theme
@@ -45,6 +48,7 @@ in
     gnome.nautilus
 
     spotify
+    zoom-us
   ];
 
   home.sessionVariables = {
