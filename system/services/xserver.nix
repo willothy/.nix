@@ -4,12 +4,13 @@
     xorg.xinput
   ];
 
+  services.libinput = {
+    enable = true;
+  };
+
   services.xserver = {
     enable = true;
     # Enable touchpad support (enabled default in most desktopManager).
-    libinput = {
-      enable = true;
-    };
     # Configure keymap in X11
     xkb.layout = "us";
     # Remaps. Probably don't need this bc of ZMK remaps.
