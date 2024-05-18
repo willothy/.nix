@@ -49,8 +49,6 @@ in
 
     spotify
     zoom-us
-
-    cachix
   ];
 
   home.sessionVariables = {
