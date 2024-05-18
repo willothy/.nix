@@ -8,6 +8,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    # neovim-nightly-overlay.url = "github:willothy/neovim-nightly-overlay";
     picom-flake = {
       # url = "github:yshui/picom/next";
       url = "github:FT-Labs/picom";
