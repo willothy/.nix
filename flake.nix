@@ -52,7 +52,7 @@
         overlays =
           [
             (import ./overlays/awesome-git.nix)
-            inputs.neovim-nightly-overlay.overlay
+            # inputs.neovim-nightly-overlay.overlay
             inputs.picom-flake.overlay."${system.system}"
             (final: prev: {
               apple-fonts = inputs.apple-fonts-flake.packages."${system.system}";
