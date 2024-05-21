@@ -52,6 +52,7 @@
         overlays =
           [
             (import ./overlays/awesome-git.nix)
+            (import ./overlays/spider_cli.nix)
             # inputs.neovim-nightly-overlay.overlay
             inputs.picom-flake.overlay."${system.system}"
             (final: prev: {

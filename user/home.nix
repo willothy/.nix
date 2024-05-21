@@ -49,6 +49,8 @@ in
 
     spotify
     zoom-us
+
+    spider_cli
   ];
 
   home.sessionVariables = {
