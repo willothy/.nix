@@ -13,6 +13,7 @@ let
     gau = "git add --update";
     v = "nvim";
     ":q" = "exit";
+    pls = "sudo";
     #cd = "z";
   };
 in
