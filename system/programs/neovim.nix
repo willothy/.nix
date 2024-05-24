@@ -9,6 +9,8 @@
   # Basic global config for initial nixos setup
   # and editing as root.
   programs.neovim = {
+    # package = pkgs.neovim-nightly;
+    package = pkgs.neovim;
     enable = true;
     defaultEditor = true;
     configure = {

@@ -8,7 +8,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    # neovim-nightly-overlay.url = "github:willothy/neovim-nightly-overlay";
     picom-flake = {
       # url = "github:yshui/picom/next";
       url = "github:FT-Labs/picom";
@@ -46,20 +45,22 @@
         homeDir = "/home/${username}";
       };
 
+      overlays =
+        [
+          (import ./overlays/awesome-git.nix)
+          (import ./overlays/spider_cli.nix)
+          inputs.picom-flake.overlay."${system.system}"
+          (final: prev: {
+            apple-fonts = inputs.apple-fonts-flake.packages."${system.system}";
+          })
+          nixgl.overlay
+          inputs.neovim-nightly-overlay.overlays.default
+        ];
+
       pkgs = import nixpkgs {
         inherit (system) system;
 
-        overlays =
-          [
-            (import ./overlays/awesome-git.nix)
-            (import ./overlays/spider_cli.nix)
-            # inputs.neovim-nightly-overlay.overlay
-            inputs.picom-flake.overlay."${system.system}"
-            (final: prev: {
-              apple-fonts = inputs.apple-fonts-flake.packages."${system.system}";
-            })
-            nixgl.overlay
-          ];
+        overlays = overlays;
 
         config = {
           allowUnfree = true;
