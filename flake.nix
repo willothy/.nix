@@ -1,3 +1,30 @@
+let
+  system = {
+    system = "x86_64-linux";
+    hostname = "nostromo";
+    timezone = "America/Los_Angeles";
+    locale = "en_US.UTF-8";
+    configsDir = ./configs;
+  };
+
+  user = rec {
+    username = "willothy";
+    name = "Will Hopkins";
+    email = "willothyh@gmail.com";
+    dotfilesDir = "~/.dotfiles/";
+    wm = "awesome";
+    wmType = "x11";
+    browser = "brave";
+    editor = "nvim";
+    editorVisual = "nvim -b";
+    pager = "delta";
+    terminal = "wezterm";
+    # Public key, obviously
+    sshSigningKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEuB3Fm5F9/qUWn2Ok7EXZc8OkKmvy6AHI+Wit0+XDiV";
+
+    homeDir = "/home/${username}";
+  };
+in
 {
   description = "Willothy's Main Nix Flake";
 
@@ -14,37 +41,12 @@
     };
     apple-fonts-flake.url = "github:Lyndeno/apple-fonts.nix";
     nixgl.url = "github:nix-community/nixGL";
+    # nix-darwin.url = "github:nix-community/nix-darwin";
   };
 
   outputs =
-    { self, nixpkgs, home-manager, nixgl, ... }@inputs:
+    { self, nixpkgs, home-manager, nixgl/* , nix-darwin */, ... }@inputs:
     let
-      system = {
-        system = "x86_64-linux";
-        hostname = "nostromo";
-        timezone = "America/Los_Angeles";
-        locale = "en_US.UTF-8";
-        configsDir = ./configs;
-      };
-
-      user = rec {
-        username = "willothy";
-        name = "Will Hopkins";
-        email = "willothyh@gmail.com";
-        dotfilesDir = "~/.dotfiles/";
-        wm = "awesome";
-        wmType = "x11";
-        browser = "brave";
-        editor = "nvim";
-        editorVisual = "nvim -b";
-        pager = "delta";
-        terminal = "wezterm";
-        # Public key, obviously
-        sshSigningKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEuB3Fm5F9/qUWn2Ok7EXZc8OkKmvy6AHI+Wit0+XDiV";
-
-        homeDir = "/home/${username}";
-      };
-
       overlays =
         [
           (import ./overlays/awesome-git.nix)
@@ -76,15 +78,26 @@
             inherit pkgs;
             inherit system;
             inherit user;
-            # apple-fonts = inputs.apple-fonts-flake.packages."${system.system}";
           };
 
           modules = [
             ./boot/refind
             ./system/configuration.nix
+            ./hosts/nostromo.nix
           ];
         };
       };
+
+      # darwinConfigurations = {
+      #   macbook = nix-darwin.lib.darwinSystem {
+      #     system = "x86_64-darwin";
+      #     inherit pkgs;
+      #     inherit user;
+      #     modules = [
+      #       ./hosts/macbook.nix
+      #     ];
+      #   };
+      # };
 
       homeConfigurations = {
         willothy = home-manager.lib.homeManagerConfiguration {
