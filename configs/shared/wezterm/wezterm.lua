@@ -17,7 +17,6 @@ local modules = {
 }
 
 for _, module in ipairs(modules) do
-	package.loaded[module] = nil
 	require(module)(config, wezterm, cmd_palette)
 end
 
@@ -25,7 +24,7 @@ wezterm.on("augment-command-palette", function(_window, _pane)
 	return cmd_palette
 end)
 
-config.front_end = "WebGpu"
+--config.front_end = "WebGpu"
 
 config.animation_fps = 30
 config.max_fps = 60
@@ -34,7 +33,7 @@ config.font = wezterm.font_with_fallback({
 	"Maple Mono NF",
 	-- "FiraCode Nerd Font",
 })
-config.font_size = 12.0
+config.font_size = 13.0
 config.underline_thickness = 1
 config.underline_position = -2.0
 
@@ -45,19 +44,22 @@ config.color_scheme = "tokyonight"
 
 config.enable_tab_bar = true
 config.use_fancy_tab_bar = false
+--config.tab_bar_at_bottom = true
 config.tab_bar_at_bottom = true
 config.tab_max_width = 30
 
-config.window_decorations = "INTEGRATED_BUTTONS | RESIZE"
+config.window_decorations = "TITLE | RESIZE | MACOS_FORCE_ENABLE_SHADOW"
+
+config.window_padding = {
+	top = "0px",
+	bottom = "0px",
+	left = "8px",
+	right = "8px",
+}
 
 config.window_frame = {
 	font = wezterm.font({ family = "Fira Code", weight = "Bold" }),
-	font_size = 12.0,
-	border_left_width = "0.0cell",
-	border_right_width = "0.0cell",
-	border_bottom_height = "0.10cell",
-	border_bottom_color = "#1a1b26",
-	border_top_height = "1.25cell",
+	font_size = 14.0,
 }
 
 config.colors = {
@@ -67,13 +69,6 @@ config.colors = {
 config.inactive_pane_hsb = {
 	saturation = 1.0,
 	brightness = 1.0,
-}
-
-config.window_padding = {
-	top = 5,
-	bottom = "0.0cell",
-	left = 10,
-	right = 8,
 }
 
 config.launch_menu = {}
