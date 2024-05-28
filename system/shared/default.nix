@@ -1,4 +1,4 @@
-{ config, pkgs, globalUserInfo, ... }: {
+{ config, pkgs, globalUserInfo, inputs, ... }: {
   nix.settings = {
     experimental-features = "nix-command flakes";
     trusted-users = [ "@admin" globalUserInfo.userName ];
@@ -18,9 +18,10 @@
 
     neovim
 
-    _1password
     # _1password-gui # install using Homebrew on mac
   ];
+
+  programs._1password.enable = true;
 
   programs.vim = {
     enable = true;

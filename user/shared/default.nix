@@ -1,4 +1,4 @@
-{ config, pkgs, globalUserInfo, lib, ... }:
+{ config, pkgs, globalUserInfo, lib, inputs, ... }:
 {
   imports = [
     ./programs/neovim.nix
@@ -7,7 +7,20 @@
     ./programs/wezterm.nix
     ./programs/ssh.nix
     ./wip.nix
+    inputs._1password-shell-plugins.hmModules.default
   ];
+
+  programs._1password-shell-plugins = {
+    enable = true;
+    plugins = with pkgs; [
+      gh 
+      awscli2
+      src-cli
+      openai
+      flyctl
+      vault
+    ];
+  };
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -40,6 +53,10 @@
       ];
     })
     maple-mono-NF
+
+    # Dev tools
+    terraform
+    gnumake
 
     # Apps
     discord

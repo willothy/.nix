@@ -13,9 +13,11 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    _1password-shell-plugins.url = "github:1Password/shell-plugins";
   };
 
-  outputs = { self, nixpkgs, home-manager, darwin, flake-utils }@inputs: {
+  outputs = { self, nixpkgs, home-manager, darwin, flake-utils, ... }@inputs: {
     packages = nixpkgs.lib.genAttrs ["x86_64-linux" "aarch64-darwin"] (system: let
       pkgs = import nixpkgs {
         inherit system;
@@ -38,6 +40,7 @@
           "/Users/${userName}"
         else
           "/home/${userName}";
+	confDir = "~/.dotfiles";
         editor = "nvim";
         editorVisual = "nvim -b";
         pager = "delta";

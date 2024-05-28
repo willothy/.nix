@@ -1,8 +1,9 @@
-{ system, ... }: {
-  #home.file.".config/wezterm" = {
-  #  source = "${system.configsDir}/wezterm";
-  #  recursive = true;
-  #};
+{ inputs, globalUserInfo, ... }: {
+  home.file.".config/wezterm" = {
+    source = "/${inputs.self}/configs/shared/wezterm";
+    recursive = true;
+  };
+
   programs.wezterm = {
     enable = true;
     enableBashIntegration = true;
