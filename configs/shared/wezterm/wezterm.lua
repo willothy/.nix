@@ -48,6 +48,8 @@ config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
 config.tab_max_width = 30
 
+config.window_decorations = "INTEGRATED_BUTTONS | RESIZE"
+
 config.window_frame = {
 	font = wezterm.font({ family = "Fira Code", weight = "Bold" }),
 	font_size = 12.0,
@@ -55,7 +57,7 @@ config.window_frame = {
 	border_right_width = "0.0cell",
 	border_bottom_height = "0.10cell",
 	border_bottom_color = "#1a1b26",
-	border_top_height = "0.0cell",
+	border_top_height = "1.25cell",
 }
 
 config.colors = {
@@ -66,8 +68,6 @@ config.inactive_pane_hsb = {
 	saturation = 1.0,
 	brightness = 1.0,
 }
-
-config.window_decorations = "RESIZE"
 
 config.window_padding = {
 	top = 5,
