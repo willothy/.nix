@@ -1,3 +1,5 @@
 { pkgs, ... }: {
-  imports = [ ];
+  imports = [
+    ./programs/neovim.nix
+  ];
 }

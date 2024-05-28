@@ -15,6 +15,8 @@
     };
 
     _1password-shell-plugins.url = "github:1Password/shell-plugins";
+
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs = { self, nixpkgs, home-manager, darwin, flake-utils, ... }@inputs: {
@@ -23,7 +25,9 @@
         inherit system;
         config.allowUnfree = true;
 
-	overlays = [ ];
+	overlays = [
+          inputs.neovim-nightly-overlay.overlays.default
+	];
       }; 
       lib = pkgs.lib;
 
