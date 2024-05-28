@@ -5,6 +5,7 @@
     ./programs/git.nix
     ./programs/starship.nix
     ./programs/wezterm.nix
+    ./programs/ssh.nix
     ./wip.nix
   ];
 
