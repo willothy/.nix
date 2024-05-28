@@ -27,6 +27,7 @@
 
 	overlays = [
           inputs.neovim-nightly-overlay.overlays.default
+	  (import ./overlays/spider-cli.nix)
 	];
       }; 
       lib = pkgs.lib;
