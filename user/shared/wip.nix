@@ -115,9 +115,6 @@ in {
   };
   programs.zsh = {
     enable = true;
-    # initExtraFirst = ''
-    #   exec fish
-    # '';
     inherit shellAliases;
   };
 
