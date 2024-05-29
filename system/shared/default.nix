@@ -1,4 +1,8 @@
 { config, pkgs, globalUserInfo, inputs, ... }: {
+  imports = [
+    ./programs/nh.nix
+  ];
+
   nix.settings = {
     experimental-features = "nix-command flakes";
     trusted-users = [ "@admin" globalUserInfo.userName ];
@@ -20,6 +24,11 @@
 
     # _1password-gui # install using Homebrew on mac
   ];
+
+  programs.nh = {
+    enable = true;
+    flake = "${globalUserInfo.homeDir}/.dotfiles";
+  };
 
   programs._1password.enable = true;
 
