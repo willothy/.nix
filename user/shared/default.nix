@@ -62,6 +62,7 @@
     discord
     spotify
     zoom-us
+    obsidian
     # brave # seems to not be on Nixpkgs with MacOS compat
   ];
 
