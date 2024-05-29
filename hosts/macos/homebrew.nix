@@ -11,7 +11,6 @@
     masApps = { };
     casks = [ 
       "1password"
-      "amethyst"
       "insomnia"
       "warp"
     ];
