@@ -14,6 +14,7 @@ return function(config, wezterm, cmd_palette)
 		end
 
 		local title = wezterm.mux.get_pane(pane_info.pane_id):get_foreground_process_info().name
+		title = title:match("^%s*(%S+)") or title
 
 		pane_cache[proc_name] = title
 
