@@ -20,6 +20,9 @@
     wget
     unzip
 
+    nodejs_22
+    bun
+
     neovim
 
     # _1password-gui # install using Homebrew on mac
