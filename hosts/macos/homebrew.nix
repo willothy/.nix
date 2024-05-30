@@ -15,9 +15,11 @@
       "warp"
       "middleclick"
       "rectangle"
+      "nikitabobko/tap/aerospace"
     ];
     taps = [ 
       "koekeishiya/formulae"
+      #"nikitabobko/tap"
     ];
     brews = [ 
       "koekeishiya/formulae/yabai"
