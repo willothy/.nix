@@ -1,4 +1,6 @@
 { pkgs, globalUserInfo, ... }: {
-  imports = [ ];
+  imports = [ 
+    ./programs/yabai.nix
+  ];
 
 }

@@ -13,8 +13,14 @@
       "1password"
       "insomnia"
       "warp"
+      "middleclick"
+      "rectangle"
     ];
-    taps = [ ];
-    brews = [ ];
+    taps = [ 
+      "koekeishiya/formulae"
+    ];
+    brews = [ 
+      "koekeishiya/formulae/yabai"
+    ];
   };
 }
