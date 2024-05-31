@@ -1,5 +1,6 @@
 # Things I need to refactor into their own modules
-{ config, pkgs, globalUserInfo, lib, ... }: let
+{ config, pkgs, globalUserInfo, lib, ... }:
+let
   shellAliases = {
     ll = "ls -l";
     la = "ls -a";
@@ -16,7 +17,8 @@
     pls = "sudo";
     #cd = "z";
   };
-in {
+in
+{
   programs.atuin = {
     enable = true;
     enableBashIntegration = true;
@@ -95,7 +97,9 @@ in {
     shellInitLast = ''
       set -g fish_greeting
 
+      fish_vi_key_bindings
       fish_vi_cursor
+
       set fish_cursor_default block
       set fish_cursor_insert line
       set fish_cursor_visual block
@@ -105,8 +109,6 @@ in {
       bind -M insert \t forward-word
       bind -M insert -k up history-prefix-search-backward
       bind -M insert -k down history-prefix-search-forward
-
-      source ${globalUserInfo.homeDir}/.config/op/plugins.sh
     '';
   };
   programs.bash = {

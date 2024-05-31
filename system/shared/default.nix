@@ -56,8 +56,9 @@
   };
 
   programs.zsh.enable = true;
+  programs.fish.enable = true;
 
-  environment.shells = with pkgs; [ bash zsh ];
+  environment.shells = with pkgs; [ zsh fish bash ];
   environment.loginShell = pkgs.zsh;
 
   environment.variables = {
