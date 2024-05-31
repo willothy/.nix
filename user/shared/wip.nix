@@ -97,13 +97,17 @@ in
     shellInitLast = ''
       set -g fish_greeting
 
-      fish_vi_key_bindings
-      fish_vi_cursor
+      if set -q NVIM
+        # Don't use vim bindings in Neovim terminal
+      else
+        fish_vi_key_bindings
+        fish_vi_cursor
 
-      set fish_cursor_default block
-      set fish_cursor_insert line
-      set fish_cursor_visual block
-      set fish_vi_force_cursor 1
+        set fish_cursor_default block
+        set fish_cursor_insert line
+        set fish_cursor_visual block
+        set fish_vi_force_cursor 1
+      end
 
       bind -e -M insert \t
       bind -M insert \t forward-word
