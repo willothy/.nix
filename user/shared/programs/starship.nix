@@ -111,7 +111,7 @@
       jobs = {
         style = "blue";
         format = "[$number]($style)";
-        disabled = false; # there's an issue with the char width of the symbol in zsh
+        disabled = true; # there's an issue with the char width of the symbol in zsh
         symbol_threshold = 0;
         number_threshold = 1;
       };
