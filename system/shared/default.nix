@@ -1,6 +1,9 @@
 { config, pkgs, globalUserInfo, inputs, ... }: {
   imports = [
     ./programs/nh.nix
+    ./programs/cli-tools.nix
+    ./programs/languages.nix
+    ./programs/libraries.nix
   ];
 
   nix.settings = {
@@ -9,21 +12,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    bottom
-    jq
-    ripgrep
-    fd
-    hexyl
-    fzf
-
-    curl
-    wget
-    unzip
-
-    nodejs_22
-    bun
-    rustup
-
     neovim
 
     # _1password-gui # install using Homebrew on mac
