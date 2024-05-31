@@ -1,28 +1,27 @@
 { config, pkgs, globalUserInfo, ... }: {
-  config.environment.systemPath = [ 
+  config.environment.systemPath = [
     "/opt/homebrew/bin"
   ];
 
   config.homebrew = {
-    enable = true; 
+    enable = true;
     caskArgs.no_quarantine = true;
     global.brewfile = true;
 
     masApps = { };
-    casks = [ 
+    casks = [
       "1password"
       "insomnia"
       "warp"
       "middleclick"
-      "rectangle"
+      "hammerspoon"
       "nikitabobko/tap/aerospace"
     ];
-    taps = [ 
-      "koekeishiya/formulae"
-      #"nikitabobko/tap"
+    taps = [
+
     ];
-    brews = [ 
-      "koekeishiya/formulae/yabai"
+    brews = [
+
     ];
   };
 }

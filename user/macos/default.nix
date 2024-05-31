@@ -1,6 +1,7 @@
 { pkgs, globalUserInfo, ... }: {
-  imports = [ 
+  imports = [
     ./programs/yabai.nix
+    ./programs/hammerspoon.nix
     ./programs/aerospace.nix
   ];
 

@@ -22,6 +22,7 @@
 
     nodejs_22
     bun
+    rustup
 
     neovim
 
