@@ -18,5 +18,14 @@
     cmake
     ccache
     pkg-config
+
+    # Deployment
+    terraform
+
+    # Third-Party CLIs
+    turso-cli # turso
+    buf # buf.build
+    awscli2 # AWS
+    gh # GitHub
   ];
 }

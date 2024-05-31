@@ -7,6 +7,8 @@
     go
     clang
     rustup
+
+    protobuf
   ];
 }
 

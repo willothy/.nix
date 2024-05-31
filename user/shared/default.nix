@@ -13,7 +13,7 @@
   programs._1password-shell-plugins = {
     enable = true;
     plugins = with pkgs; [
-      gh 
+      gh
       awscli2
       src-cli
       openai
@@ -27,15 +27,16 @@
   home.username = globalUserInfo.userName;
   home.homeDirectory = globalUserInfo.homeDir;
 
-  home.sessionVariables = { 
+  home.sessionVariables = {
     VISUAL = globalUserInfo.editorVisual;
     BROWSER = globalUserInfo.browser;
     PAGER = globalUserInfo.pager;
 
-    SSH_AUTH_SOCK = if (pkgs.system == "aarch64-darwin") then
-      "${globalUserInfo.homeDir}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-    else
-      "${globalUserInfo.homeDir}/.1password/agent.sock"
+    SSH_AUTH_SOCK =
+      if (pkgs.system == "aarch64-darwin") then
+        "${globalUserInfo.homeDir}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+      else
+        "${globalUserInfo.homeDir}/.1password/agent.sock"
     ;
   };
 
@@ -53,10 +54,6 @@
       ];
     })
     maple-mono-NF
-
-    # Dev tools
-    terraform
-    gnumake
 
     # Apps
     discord
