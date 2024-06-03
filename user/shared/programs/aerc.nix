@@ -7,7 +7,9 @@
       # Work = { };
     };
     extraConfig = {
-      editor = "nvim";
+      compose = {
+        editor = "nvim";
+      };
     };
   };
 }
