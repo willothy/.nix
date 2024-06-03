@@ -25,10 +25,11 @@
       color.pager = "yes";
       gpg.format = "ssh";
       "gpg \"ssh\"" = {
-        program = if (pkgs.system == "aarch64-darwin") then
-          "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
-        else 
-          "${pkgs._1password-gui}/bin/op-ssh-sign"
+        program =
+          if (pkgs.system == "aarch64-darwin") then
+            "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+          else
+            "${pkgs._1password-gui}/bin/op-ssh-sign"
         ;
       };
       pull = {

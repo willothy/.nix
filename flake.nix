@@ -29,9 +29,9 @@
           overlays = [
             #inputs.neovim-nightly-overlay.overlays.default
             (import ./overlays/spider-cli.nix)
+            (import ./overlays/bufbuild.nix)
           ];
         };
-        lib = pkgs.lib;
 
 
         globalConfig = {

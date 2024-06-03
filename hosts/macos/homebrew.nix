@@ -15,14 +15,14 @@
       "warp" # Fancy terminal
       "middleclick" # Three-finger click = middle click
       "hammerspoon" # Automation
-      "nikitabobko/tclickap/aerospace" # Tiling WM
+      "nikitabobko/tap/aerospace" # Tiling WM
       "orbstack" # Docker Desktop alternative
     ];
     taps = [
-
+      "localstack/tap"
     ];
     brews = [
-
+      "localstack-cli" # Local AWS Dev Stack
     ];
   };
 }
