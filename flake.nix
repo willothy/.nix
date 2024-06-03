@@ -49,6 +49,7 @@
         [
           (import ./overlays/awesome-git.nix)
           (import ./overlays/spider_cli.nix)
+          (import ./overlays/bufbuild.nix)
           inputs.picom-flake.overlay."${system.system}"
           (final: prev: {
             apple-fonts = inputs.apple-fonts-flake.packages."${system.system}";

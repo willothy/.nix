@@ -52,6 +52,7 @@ in
     zoom-us
 
     spider_cli
+    buf
   ];
 
   home.sessionVariables = {
