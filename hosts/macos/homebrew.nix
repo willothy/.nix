@@ -20,9 +20,11 @@
     ];
     taps = [
       "localstack/tap"
+      "codecrafters-io/tap"
     ];
     brews = [
       "localstack-cli" # Local AWS Dev Stack
+      "codecrafters"
     ];
   };
 }
