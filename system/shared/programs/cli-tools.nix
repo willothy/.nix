@@ -37,6 +37,7 @@
     cmake
     ccache
     pkg-config
+    act # Run GitHub actions locally
 
     # Work & Development
     hyperfine # Benchmarks
