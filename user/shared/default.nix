@@ -15,7 +15,7 @@
     enable = true;
     plugins = with pkgs; [
       gh
-      awscli2
+      # awscli2
       src-cli
       openai
       flyctl

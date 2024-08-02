@@ -7,6 +7,7 @@
     luajitPackages.luarocks
 
     poetry
+    poetryPlugins.poetry-plugin-export
     python312
 
     go

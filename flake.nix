@@ -16,7 +16,7 @@
 
     _1password-shell-plugins.url = "github:1Password/shell-plugins";
 
-    #neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs = { self, nixpkgs, home-manager, darwin, flake-utils, ... }@inputs: {
@@ -27,7 +27,7 @@
           config.allowUnfree = true;
 
           overlays = [
-            #inputs.neovim-nightly-overlay.overlays.default
+            inputs.neovim-nightly-overlay.overlays.default
             (import ./overlays/spider-cli.nix)
             (import ./overlays/bufbuild.nix)
           ];
