@@ -15,7 +15,7 @@
       "warp" # Fancy terminal
       "middleclick" # Three-finger click = middle click
       "hammerspoon" # Automation
-      "nikitabobko/tap/aerospace" # Tiling WM
+      # "nikitabobko/tap/aerospace" # Tiling WM
       "orbstack" # Docker Desktop alternative
     ];
     taps = [
