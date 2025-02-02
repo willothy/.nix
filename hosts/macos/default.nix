@@ -1,4 +1,4 @@
-{ config, pkgs, globalUserInfo, ... }: {
+{ config, lib, pkgs, globalUserInfo, ... }: {
   imports = [
     ./homebrew.nix
   ];
@@ -15,7 +15,7 @@
         };
         options = "--delete-older-than 30d";
       };
-      package = pkgs.nix;
+      package = lib.mkForce pkgs.nix;
     };
     nixpkgs = {
       config.allowUnfree = true;

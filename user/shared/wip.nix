@@ -64,7 +64,7 @@ in
     enableFishIntegration = true;
     enableBashIntegration = true;
     enableZshIntegration = true;
-    icons = true;
+    icons = "auto";
     git = true;
   };
   programs.nix-index = {
@@ -97,6 +97,11 @@ in
     shellInitLast = ''
       set -g fish_greeting
 
+      # Function to check if a command/binary exists
+      function has
+          command -v $argv[1] >/dev/null 2>&1
+      end
+
       if set -q NVIM
         # Don't use vim bindings in Neovim terminal
       else
@@ -113,15 +118,53 @@ in
       bind -M insert \t forward-word
       bind -M insert -k up history-prefix-search-backward
       bind -M insert -k down history-prefix-search-forward
+
+      if [ -n "$GHOSTTY_RESOURCES_DIR" ];
+          source "$GHOSTTY_RESOURCES_DIR/shell-integration/fish/vendor_conf.d/ghostty-shell-integration.fish"
+      end
+
+      if has fnm
+        fnm env --use-on-cd --shell fish | source
+      end
+
     '';
   };
   programs.bash = {
     enable = true;
     inherit shellAliases;
+
+    initExtra = ''
+      # Function to check if a command/binary exists
+      has() {
+        command -v "$1" >/dev/null 2>&1
+      }
+
+      if has fnm; then
+        eval "$(fnm env --use-on-cd --shell bash)"
+      fi
+
+      #if [ -n "$GHOSTTY_RESOURCES_DIR" ]; then
+      #    builtin source "$GHOSTTY_RESOURCES_DIR/shell-integration/bash/ghostty.bash"
+      #fi
+    '';
   };
   programs.zsh = {
     enable = true;
     inherit shellAliases;
+
+    initExtra = ''
+      has() {
+        command -v "$1" >/dev/null 2>&1
+      }
+
+      #if [ -n "$GHOSTTY_RESOURCES_DIR" ]; then
+      #    source "$GHOSTTY_RESOURCES_DIR/shell-integration/zsh/ghostty-integration"
+      #fi
+
+      if has fnm; then
+        eval "$(fnm env --use-on-cd --shell zsh)"
+      fi
+    '';
   };
 
   programs.bat.enable = true;

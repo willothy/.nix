@@ -10,12 +10,9 @@
       ;
       orbstack =
         if darwin then
-          ''
-            Include ${globalUserInfo.homeDir}/.orbstack/ssh/config
-          ''
+          "Include ${globalUserInfo.homeDir}/.orbstack/ssh/config"
         else
-          ''
-          ''
+          ""
       ;
     in
     {

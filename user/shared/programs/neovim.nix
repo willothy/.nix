@@ -1,8 +1,8 @@
 { pkgs, ... }: {
-  programs.neovim = {
-    package = pkgs.neovim; #-nightly;
-    enable = true;
-  };
+  # programs.neovim = {
+  #   package = pkgs.neovim;
+  #   enable = true;
+  # };
 
   home.packages = with pkgs; [ sqlite ];
 

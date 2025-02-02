@@ -16,10 +16,12 @@
 
     _1password-shell-plugins.url = "github:1Password/shell-plugins";
 
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    # neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/0.1";
   };
 
-  outputs = { self, nixpkgs, home-manager, darwin, flake-utils, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, darwin, flake-utils, determinate, ... }@inputs: {
     packages = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-darwin" ] (system:
       let
         pkgs = import nixpkgs {
@@ -27,9 +29,9 @@
           config.allowUnfree = true;
 
           overlays = [
-            inputs.neovim-nightly-overlay.overlays.default
             (import ./overlays/spider-cli.nix)
             (import ./overlays/bufbuild.nix)
+            # inputs.neovim-nightly-overlay.overlays.default
           ];
         };
 
@@ -74,6 +76,7 @@
               ./hosts/macos
               ./system/macos
               ./system/shared
+              determinate.darwinModules.default
             ];
           };
         };

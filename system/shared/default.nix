@@ -1,4 +1,4 @@
-{ config, pkgs, globalUserInfo, inputs, ... }: {
+{ pkgs, globalUserInfo, ... }: {
   imports = [
     ./programs/nh.nix
     ./programs/cli-tools.nix
@@ -12,9 +12,32 @@
   };
 
   environment.systemPackages = with pkgs; [
-    neovim
+    # neovim
 
     # _1password-gui # install using Homebrew on mac
+
+    ((vim_configurable.override { }).customize {
+      name = "vim";
+      vimrcConfig.packages.myplugins = with pkgs.vimPlugins; {
+        start = [ vim-nix vim-lastplace ];
+        opt = [ ];
+      };
+      vimrcConfig.customRC = ''
+        filetype plugin indent on
+        syntax on
+
+        set shiftwidth=2
+        set tabstop=2
+        set expandtab
+
+        set showtabline=3
+        set scrolloff=10
+
+        set number relativenumber
+
+        set nowrap hlsearch incsearch showmode
+      '';
+    })
   ];
 
   programs.nh = {
@@ -22,32 +45,16 @@
     flake = "${globalUserInfo.homeDir}/.dotfiles";
   };
 
-  programs._1password.enable = true;
+  programs._1password-cli.enable = true;
 
-  programs.vim = {
-    enable = true;
-    vimConfig = ''
-      filetype plugin indent on
-      syntax on
-
-      set shiftwidth=2
-      set tabstop=2
-      set expandtab
-
-      set showtabline=3
-      set scrolloff=10
-
-      set number relativenumber
-
-      set nowrap hlsearch incsearch showmode
-    '';
-  };
+  # programs.vim = {
+  #   enable = true;
+  # };
 
   programs.zsh.enable = true;
   programs.fish.enable = true;
 
   environment.shells = with pkgs; [ zsh fish bash ];
-  environment.loginShell = pkgs.zsh;
 
   environment.variables = {
     LANG = "en_US.UTF-8";

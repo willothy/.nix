@@ -24,14 +24,16 @@ wezterm.on("augment-command-palette", function(_window, _pane)
 	return cmd_palette
 end)
 
---config.front_end = "WebGpu"
+-- config.front_end = "OpenGL"
+config.front_end = "WebGpu"
 
-config.animation_fps = 30
-config.max_fps = 60
+config.animation_fps = 60
+config.max_fps = 120
 
 config.font = wezterm.font_with_fallback({
 	"Maple Mono NF",
 	-- "FiraCode Nerd Font",
+	-- "Helvetica Neue",
 })
 config.font_size = 13.0
 config.underline_thickness = 1

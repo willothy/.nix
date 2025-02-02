@@ -1,6 +1,8 @@
 { config, pkgs, globalUserInfo, ... }: {
   config.environment.systemPath = [
     "/opt/homebrew/bin"
+    "~/.cargo/bin"
+    "~/.local/bin"
   ];
 
   config.homebrew = {
@@ -15,7 +17,6 @@
       "warp" # Fancy terminal
       "middleclick" # Three-finger click = middle click
       "hammerspoon" # Automation
-      # "nikitabobko/tap/aerospace" # Tiling WM
       "orbstack" # Docker Desktop alternative
     ];
     taps = [
@@ -25,6 +26,7 @@
     brews = [
       "localstack-cli" # Local AWS Dev Stack
       "codecrafters"
+      #"tailscale"
     ];
   };
 }

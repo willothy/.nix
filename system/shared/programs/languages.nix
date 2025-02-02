@@ -1,8 +1,5 @@
 { pkgs, ... }: {
   environment.systemPackages = with pkgs; [
-    nodejs_22
-    bun
-
     luajit
     luajitPackages.luarocks
 
@@ -10,11 +7,14 @@
     poetryPlugins.poetry-plugin-export
     python312
 
-    go
-    clang
+    # go
+    # clang
     rustup
 
-    protobuf
+    # protobuf
+
+    # ruby (ugh)
+    ruby_3_3
   ];
 }
 

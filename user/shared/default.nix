@@ -48,19 +48,19 @@
 
   home.packages = with pkgs; [
     # UI / Fonts
-    (nerdfonts.override {
-      fonts = [
-        "FiraCode"
-        "FiraMono"
-      ];
-    })
+    # (nerd-fonts.override {
+    #   fonts = [
+    #     "FiraCode"
+    #     "FiraMono"
+    #   ];
+    # })
     maple-mono-NF
 
     # Apps
-    discord
-    spotify
-    zoom-us
-    obsidian
+    # discord
+    #spotify
+    #zoom-us
+    #obsidian
     # brave # seems to not be on Nixpkgs with MacOS compat
   ];
 
