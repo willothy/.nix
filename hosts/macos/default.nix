@@ -5,9 +5,8 @@
 
   config = {
     nix = {
+      enable = false;
       gc = {
-        user = "root";
-        automatic = true;
         interval = {
           Weekday = 0;
           Hour = 2;
@@ -21,7 +20,7 @@
       config.allowUnfree = true;
       hostPlatform = "aarch64-darwin";
     };
-    services.nix-daemon.enable = true;
+    # services.nix-daemon.enable = true;
 
     system.stateVersion = 4;
 

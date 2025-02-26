@@ -1,8 +1,9 @@
 { config, pkgs, globalUserInfo, ... }: {
   config.environment.systemPath = [
     "/opt/homebrew/bin"
-    "~/.cargo/bin"
-    "~/.local/bin"
+    "/Users/willothy/.cargo/bin"
+    "/Users/willothy/.local/bin"
+    "/Users/willothy/.gcloud-sdk/google-cloud-sdk/bin"
   ];
 
   config.homebrew = {

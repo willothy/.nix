@@ -76,7 +76,6 @@
               ./hosts/macos
               ./system/macos
               ./system/shared
-              determinate.darwinModules.default
             ];
           };
         };
