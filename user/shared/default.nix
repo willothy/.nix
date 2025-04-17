@@ -54,7 +54,7 @@
     #     "FiraMono"
     #   ];
     # })
-    maple-mono-NF
+    maple-mono.NF
 
     # Apps
     # discord
