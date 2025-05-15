@@ -152,7 +152,7 @@ in
     enable = true;
     inherit shellAliases;
 
-    initExtra = ''
+    initContent = ''
       has() {
         command -v "$1" >/dev/null 2>&1
       }
