@@ -6,6 +6,7 @@
     enableZshIntegration = true;
     settings = {
       format = lib.concatStrings [
+        "$hostname"
         "$directory"
         "$git_branch"
         "$git_commit"
@@ -26,6 +27,10 @@
         "$\{custom.vi_mode\}"
         "$character"
       ];
+      hostname = {
+        ssh_only = true;
+        format = "[$hostname]($style):";
+      };
       shell = {
         disabled = false;
         style = "blue";

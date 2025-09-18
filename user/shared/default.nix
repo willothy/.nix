@@ -19,7 +19,7 @@
       src-cli
       openai
       flyctl
-      vault
+      # vault
     ];
   };
 

@@ -119,9 +119,9 @@ in
       bind -M insert -k up history-prefix-search-backward
       bind -M insert -k down history-prefix-search-forward
 
-      if [ -n "$GHOSTTY_RESOURCES_DIR" ];
-          source "$GHOSTTY_RESOURCES_DIR/shell-integration/fish/vendor_conf.d/ghostty-shell-integration.fish"
-      end
+      # if [ -n "$GHOSTTY_RESOURCES_DIR" ];
+      #     source "$GHOSTTY_RESOURCES_DIR/shell-integration/fish/vendor_conf.d/ghostty-shell-integration.fish"
+      # end
 
       if has fnm
         fnm env --use-on-cd --shell fish | source

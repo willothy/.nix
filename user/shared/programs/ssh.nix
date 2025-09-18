@@ -17,15 +17,31 @@
     in
     {
       enable = true;
-      forwardAgent = true;
+      enableDefaultConfig = false;
       matchBlocks = {
         "*" = {
           host = "*";
           extraOptions.IdentityAgent = ''"${socket}"'';
+          forwardAgent = true;
+        };
+        nostromo = {
+          host = "nostromo";
+          # extraOptions.IdentityAgent = ''"${socket}"'';
+          forwardAgent = true;
         };
       };
       extraConfig = ''
+        SetEnv TERM="xterm-256color"
+
         ${orbstack}
+
+        Host kitchen
+          HostName 192.168.50.156
+          SetEnv TERM="xterm-256color"
+
+        Host nostromo
+          HostName nostromo
+          SetEnv TERM="xterm-256color"
       '';
     };
 }
